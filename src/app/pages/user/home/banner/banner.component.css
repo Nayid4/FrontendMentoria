@@ -1,0 +1,27 @@
+.fondo2 {
+    /*background-color: #282833;*/
+    background: url('https://img.freepik.com/fotos-premium/interior-espacio-trabajo-oficina-moderno-oficina_1230717-278551.jpg?w=740');
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen en la pantalla */
+}
+
+.fondo2 {
+    /* Imagen de fondo */
+    background: url('https://img.freepik.com/foto-gratis/grupo-personas-diversas-que-tienen-reunion-negocios_53876-25060.jpg?t=st=1729013217~exp=1729016817~hmac=c00fcd96bad134b64ed1c0ec4b1dd83cbeac360763c4bd0f3ec336a098ec66ae&w=1060');
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen en la pantalla */
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
+}
+
+.fondo2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65); /* Fondo negro con opacidad del 50% */
+    z-index: 1; /* Asegura que esté encima de la imagen de fondo */
+}

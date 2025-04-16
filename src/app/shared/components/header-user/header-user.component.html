@@ -1,0 +1,41 @@
+<header 
+  [ngClass]="{ 'bg-negro': isScrolled || alwaysFixed }"
+  class="flex justify-center px-2 py-2 w-full fixed top-0 z-50 transition-colors duration-500 ease-in-out">
+  <div class="w-1000 h-11 flex justify-between items-center">
+    <div class="flex gap-2 justify-center">
+      <div class="block w-1 rounded-sm bg-fondo-verde"></div>
+      <a class="text-letra-blanca text-3xl font-bold" [routerLink]="['/']">Mentoria</a>
+    </div>
+    <!-- Botón de hamburguesa para pantallas pequeñas -->
+    <button 
+      type="button" 
+      class="lg:hidden text-letra-blanca" 
+      (click)="menuVisible = true">
+      <i class="pi pi-bars text-2xl"></i>
+    </button>
+
+    <nav class="items-center gap-4 hidden lg:flex">
+      @for (option of listaDeOpciones; track option.id) {
+        <a 
+          class="text-lg text-letra-blanca font-semibold no-underline border-b-2 border-transparent hover:border-b-2 hover:border-fondo-verde box-border transition duration-300" 
+          [routerLink]="'/'" [fragment]="option.url">
+          {{option.label}}
+        </a>
+        @if (option != listaDeOpciones[listaDeOpciones.length - 1]) {
+          <div class="h-6 w-px bg-letra-blanca opacity-50"></div> <!-- Separador -->
+        }
+      }
+    </nav>
+    
+    
+    <a 
+      [routerLink]="['/autenticacion/iniciar-sesion']" 
+      class="hidden lg:flex text-lg text-letra-blanca font-semibold no-underline border-b-2 border-transparent hover:border-b-2 hover:border-fondo-verde box-border transition duration-300" >
+      Iniciar Sesion
+    </a>
+
+    
+
+
+  </div>
+</header>
