@@ -1,1 +1,80 @@
-<p>footer-user works!</p>
+<footer class="bg-black text-white py-10 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Acerca de -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Sobre el Programa</h3>
+            <p class="text-gray-400">
+                El Programa de Mentorías de la Universidad Ricardo Palma busca fortalecer el desarrollo académico y profesional de los estudiantes mediante acompañamiento personalizado por parte de mentores voluntarios.
+            </p>
+        </div>
+
+        <!-- Servicios -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Servicios</h3>
+            <ul>
+                <li class="mb-2">
+                    <a [routerLink]="'/'" [fragment]="'process'" class="text-gray-400 hover:text-white">Proceso de Inscripción</a>
+                </li>
+                <li class="mb-2">
+                    <a [routerLink]="['/inscripcion']" class="text-gray-400 hover:text-white">Inscribirse</a>
+                </li>                
+            </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+            <ul>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-map-marker text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">Av. Benavides 5440</span>
+                </li>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-map-marker text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">Santiago de Surco</span>
+                </li>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-map-marker text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">Lima 33 - Perú</span>
+                </li>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-map-marker text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">Apartado postal 1801</span>
+                </li>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-phone text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">
+                        Lima - (01) 708 0000</span>
+                </li>
+                <li class="mb-2 flex items-center">
+                    <i class="pi pi-envelope text-letra-verde mr-2"></i>
+                    <span class="text-gray-400">mesadepartes{{'@'}}urp.edu.pe</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Síguenos</h3>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="pi pi-facebook text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="pi pi-twitter text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="pi pi-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="pi pi-linkedin text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Derechos reservados -->
+    <div class="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500">
+        <p>&copy; 2025 Universidad Ricardo Palma. Todos los derechos reservados.</p>
+    </div>
+</footer>

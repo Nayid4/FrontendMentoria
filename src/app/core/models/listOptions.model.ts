@@ -17,7 +17,7 @@ export interface Options {
 export interface Option {
     id: number,
     label: string,
-    icon: string,
-    url: string,
+    icon?: string,
+    url?: string,
     description: string,
 }

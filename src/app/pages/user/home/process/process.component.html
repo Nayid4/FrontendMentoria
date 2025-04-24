@@ -13,7 +13,7 @@
             @for (step of stepList; track $index) {
                 <app-card-process 
                   [id]="step.id"
-                  [title]="step.title"
+                  [title]="step.label"
                   [description]="step.description"
                 />
             }

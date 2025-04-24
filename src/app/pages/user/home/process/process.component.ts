@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Step } from '../../../../core/models/step.model';
 import { StepList } from '../../../../assets/data/stepList';
 import { CardProcessComponent } from '../../../../shared/components/card-process/card-process.component';
+import { Option } from '../../../../core/models/listOptions.model';
 
 @Component({
   selector: 'app-process',
@@ -12,5 +12,5 @@ import { CardProcessComponent } from '../../../../shared/components/card-process
   styleUrl: './process.component.css'
 })
 export class ProcessComponent {
-  stepList: Step[] = StepList
+  stepList: Option[] = StepList
 }

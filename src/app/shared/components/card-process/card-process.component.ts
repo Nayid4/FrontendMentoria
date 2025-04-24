@@ -6,8 +6,10 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card-process.component.html',
   styleUrl: './card-process.component.css'
 })
-export class CardProcessComponent {
+export class CardProcessComponent{
+  
   @Input() id: number = 0;
   @Input() title: string = '';
   @Input() description: string = '';
+
 }
