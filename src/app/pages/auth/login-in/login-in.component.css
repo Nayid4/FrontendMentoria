@@ -4,8 +4,8 @@
 
 .fondo2 {
     /*background-color: #282833;*/
-    /*background: url('/assets/fondo-inicio.jpg');*/
-    background: url('https://img.freepik.com/foto-gratis/habitacion-vacia-sillas-escritorios_23-2149008873.jpg?t=st=1727676990~exp=1727680590~hmac=4b2adb219fd390d333c6e72068b7a1a3fcf1faaf8f66cdd5876e8865a8310833&w=740');
+    background: url('../../../assets/images/campus2.jpg');
+    /*background: url('https://img.freepik.com/foto-gratis/habitacion-vacia-sillas-escritorios_23-2149008873.jpg?t=st=1727676990~exp=1727680590~hmac=4b2adb219fd390d333c6e72068b7a1a3fcf1faaf8f66cdd5876e8865a8310833&w=740');*/
     background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-position: center; /* Centra la imagen en la pantalla */

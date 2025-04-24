@@ -1,4 +1,8 @@
 export interface Career {
-    id: string;
+    id?: string;
+    name?: string;
+}
+
+export interface CareerCommand {
     name: string;
 }
