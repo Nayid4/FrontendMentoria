@@ -13,7 +13,7 @@ export const USER_ROUTES: Routes = [
                 component: HomeIndexComponent
             },
             {
-                path: 'registrar-usuario',
+                path: 'inscripcion',
                 component: RegisterUserIndexComponent
             }
         ]

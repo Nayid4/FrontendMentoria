@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BannerComponent } from '../banner/banner.component';
+import { ProcessComponent } from '../process/process.component';
 @Component({
   selector: 'app-home-index',
   imports: [
-    RouterModule
+    RouterModule,
+    BannerComponent,
+    ProcessComponent
   ],
   templateUrl: './home-index.component.html',
   styleUrl: './home-index.component.css'
@@ -11,5 +15,5 @@ import { RouterModule } from '@angular/router';
 export class HomeIndexComponent {
   titulo: string  = "Nosotros"
 
-  rutaConsultar: string = '/registrar-usuario'
+  
 }

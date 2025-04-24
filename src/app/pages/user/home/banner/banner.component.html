@@ -1,16 +1,38 @@
-<section id="banner" class="fondo2 flex justify-center items-center min-h-screen relative">
-    <div class="z-10 w-full max-w-screen-lg text-left px-4 py-20 flex flex-col items-start gap-4">
-      <span class="text-gray-100 text-sm sm:text-md font-bold">Mentorías académicas y profesionales</span>
-      <h1 class="text-fondo-verde font-bold text-5xl sm:text-7xl lg:text-8xl">Conecta con un mentor</h1>
-      <p class="text-gray-200 max-w-3xl leading-relaxed font-semibold">
-        ¿Necesitas orientación académica o profesional? Te ofrecemos un espacio donde puedes conectarte con mentores especializados dispuestos a ayudarte a crecer, resolver dudas y alcanzar tus objetivos. ¡Agenda tu mentoría de manera fácil y rápida!
-      </p>
-      <a 
-        [routerLink]="rutaConsultar"
-        class="mt-4 px-6 py-3 text-lg bg-fondo-verde hover:bg-fondo-verde-old text-letra-blanca font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
-      >
-        Solicitar Mentoría
-      </a>
+<section id="banner" class="w-full py-8 md:py-20 lg:py-24 bg-gray-50 to-muted flex justify-center">
+  <div class="container px-4 md:px-6">
+    <div class="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+      <div class="space-y-4">
+        <span class="text-gray-400 text-sm sm:text-md font-bold">Mentorías académicas y profesionales</span>
+        <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Transforma tu Experiencia Universitaria con Nuestro Programa de Mentorías</h1>
+        <p class="max-w-[600px] text-muted-foreground md:text-xl text-gray-500">
+          Conecta con estudiantes experimentados que te guiarán en tu camino académico y profesional, ayudándote a alcanzar tu máximo potencial.
+        </p>
+        <div class="flex gap-4">
+          <a 
+            [routerLink]="rutaConsultar"
+            class="mt-4 px-6 py-2 text-lg bg-green-900 hover:bg-green-900/90 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          >
+            Inscribirse
+          </a>
+  
+          <a 
+          [routerLink]="'/'" [fragment]="'process'"
+            class="mt-4 px-6 py-2 text-lg bg-white hover:bg-white/90 text-black font-semibold border-1 border-gray-100 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          >
+            Conoce el Proceso
+          </a>
+        </div>
+      </div>
+      <div className="relative h-[350px] w-full rounded-xl overflow-hidden">
+        <img
+          src="assets/images/campus.jpg"
+          alt="Estudiantes en sesión de mentoría"
+          fill
+          class="object-cover rounded-2xl"
+          priority
+        />
+      </div>
     </div>
-  </section>
+  </div>
+</section>
   

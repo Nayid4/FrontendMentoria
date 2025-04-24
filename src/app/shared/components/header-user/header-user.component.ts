@@ -22,6 +22,9 @@ export class HeaderUserComponent {
 
   listaDeOpciones: ListOptions[] = ListaDeOpcionesEncabezado;
 
+  rutaIncripcion: string = '/inscripcion'
+  rutaAutenticacion: string = '/autenticacion/iniciar-sesion'
+
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object // Inyecta el PLATFORM_ID

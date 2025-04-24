@@ -1,38 +1,47 @@
 <header 
-  [ngClass]="{ 'bg-negro': isScrolled || alwaysFixed }"
-  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-  <div class="w-1000 h-11 flex justify-between items-center">
+  class="sticky top-0 z-50 w-full border-b border-gray-300/40 bg-white ">
+  <div class=" py-2 px-1 flex justify-between items-center">
     <div class="flex gap-2 justify-center">
-      <div class="block w-1 rounded-sm bg-fondo-verde"></div>
-      <a class="text-xl font-bold" [routerLink]="['/']">Mentoria</a>
+      <img src="assets/images/logo.jpg" alt="logo de la urp" class="" />
+      <!--<a class="text-xl font-bold" [routerLink]="['/']">Mentoria</a>-->
     </div>
     <!-- Botón de hamburguesa para pantallas pequeñas -->
-    <button 
+    <!--<button 
       type="button" 
       class="lg:hidden text-letra-blanca" 
       (click)="menuVisible = true">
       <i class="pi pi-bars text-2xl"></i>
-    </button>
+    </button>-->
 
-    <nav class="hidden md:flex gap-6">
+    <nav class="hidden lg:flex gap-6 items-center">
       @for (option of listaDeOpciones; track option.id) {
         <a 
-          class="text-sm font-medium hover:underline underline-offset-4" 
+          class="text-sm font-medium underline-offset-4 text-gray-500 transition-all duration-300 ease-in-out transform hover:scale-105" 
           [routerLink]="'/'" [fragment]="option.url">
           {{option.label}}
         </a>
         @if (option != listaDeOpciones[listaDeOpciones.length - 1]) {
-          <div class="h-6 w-px bg-letra-blanca opacity-50"></div> <!-- Separador -->
+          <div class="h-6 w-px bg-gray-400 opacity-50"></div> <!-- Separador -->
         }
       }
     </nav>
     
     
-    <a 
-      [routerLink]="['/autenticacion/iniciar-sesion']" 
-      class=" px-4 py-2 cursor-pointer  bg-green-900 hover:bg-green-900/90 text-lg text-white font-semibold border-none rounded-md" >
-      Iniciar Sesion
-    </a>
+    <div class="flex gap-4">
+      <a 
+        [routerLink]="rutaIncripcion"
+        class="px-4 py-2 text-lg bg-green-900 hover:bg-green-900/90 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+      >
+        Inscribirse
+      </a>
+
+      <a 
+        [routerLink]="rutaAutenticacion"
+        class="px-4 py-2 text-lg bg-white hover:bg-white/90 text-black font-semibold rounded-lg  transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+      >
+        Iniciar Sesión
+      </a>
+    </div>
 
   </div>
 </header>

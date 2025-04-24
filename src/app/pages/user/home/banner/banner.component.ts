@@ -12,5 +12,5 @@ import { RouterModule } from '@angular/router';
 export class BannerComponent {
   titulo: string  = "Nosotros"
 
-  rutaConsultar: string = '/registrar-usuario'
+  rutaConsultar: string = '/inscripcion'
 }
