@@ -11,36 +11,23 @@ export const ListaDeOpcionesEncabezado: ListOptions[] = [
   {
     id: 2,
     icon: '',
-    label: 'Nosotros',
-    url: 'nosotros',
+    label: 'Proceso',
+    url: 'process',
     options: []
   },
   {
     id: 3,
     icon: '',
     label: 'Beneficios',
-    url: 'beneficios',
+    url: 'benefits',
     options: []
   },
   {
     id: 4,
     icon: '',
     label: 'Preguntas Frecuentes',
-    url: 'preguntas',
-    options: []
-  },
-  {
-    id: 5,
-    icon: '',
-    label: 'Objetivos',
-    url: 'objetivos',
-    options: []
-  },
-  {
-    id: 6,
-    icon: '',
-    label: 'Problematica',
-    url: 'problematica',
+    url: 'questions',
     options: []
   }
+  
 ];

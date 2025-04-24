@@ -8,7 +8,13 @@ export interface User {
     userName: string;
     personalInformation: PersonalInformation;
     academicInformation: AcademicInformation;
-  }
+}
   
+export interface UserCommand {
+  role: Role;
+  userName: string;
+  personalInformation: PersonalInformation;
+  academicInformation: AcademicInformation;
+}
   
   

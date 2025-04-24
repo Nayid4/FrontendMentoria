@@ -1,0 +1,118 @@
+<p-dialog header="{{titulo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }" (onHide)="cerrarDialog()">
+    <span class="p-text-secondary block mb-5">{{ tipo }} información de usuario.</span>
+  
+    <form [formGroup]="formularioUsuario" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+      <p-stepper [(value)]="activeStep">
+        <p-step-list>
+          <p-step [value]="1">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button class="bg-transparent border-0 flex flex-col items-center gap-2" (click)="activateCallback()">
+                <span class="rounded-full border-2 w-10 h-10 flex items-center justify-center"
+                      [ngClass]="{
+                        'bg-primary text-white border-primary': value <= activeStep,
+                        'border-gray-300 text-gray-400': value > activeStep
+                      }">
+                  <i class="pi pi-user"></i>
+                </span>
+              </button>
+            </ng-template>
+          </p-step>
+  
+          <p-step [value]="2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button class="bg-transparent border-0 flex flex-col items-center gap-2" (click)="activateCallback()">
+                <span class="rounded-full border-2 w-10 h-10 flex items-center justify-center"
+                      [ngClass]="{
+                        'bg-primary text-white border-primary': value <= activeStep,
+                        'border-gray-300 text-gray-400': value > activeStep
+                      }">
+                  <i class="pi pi-lock"></i>
+                </span>
+              </button>
+            </ng-template>
+          </p-step>
+  
+          <p-step [value]="3">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button class="bg-transparent border-0 flex flex-col items-center gap-2" (click)="activateCallback()">
+                <span class="rounded-full border-2 w-10 h-10 flex items-center justify-center"
+                      [ngClass]="{
+                        'bg-primary text-white border-primary': value <= activeStep,
+                        'border-gray-300 text-gray-400': value > activeStep
+                      }">
+                  <i class="pi pi-check"></i>
+                </span>
+              </button>
+            </ng-template>
+          </p-step>
+        </p-step-list>
+  
+        <p-step-panels>
+          <!-- Paso 1 -->
+          <p-step-panel [value]="1">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-4 max-w-lg mx-auto">
+                <label class="flex flex-col font-bold gap-2">
+                  Nombre
+                  <input type="text" formControlName="nombre" placeholder="Ingrese el nombre del usuario"
+                         class="p-inputtext w-full border-2 rounded-md p-2"
+                         [ngClass]="{ 'border-red-500': campoInvalido('nombre') }"/>
+                </label>
+  
+                <label class="flex flex-col font-bold gap-2">
+                  Apellido
+                  <input type="text" formControlName="apellido" placeholder="Ingrese el apellido del usuario"
+                         class="p-inputtext w-full border-2 rounded-md p-2"
+                         [ngClass]="{ 'border-red-500': campoInvalido('apellido') }"/>
+                </label>
+  
+                <div class="flex justify-end pt-4">
+                  <p-button (onClick)="activateCallback(2)" label="Siguiente" icon="pi pi-arrow-right" iconPos="right"/>
+                </div>
+              </div>
+            </ng-template>
+          </p-step-panel>
+  
+          <!-- Paso 2 -->
+          <p-step-panel [value]="2">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-4 max-w-lg mx-auto">
+                <label class="flex flex-col font-bold gap-2">
+                  Nombre de usuario
+                  <input type="text" formControlName="nombreDeUsuario" placeholder="Ingrese el nombre de usuario"
+                         class="p-inputtext w-full border-2 rounded-md p-2"
+                         [ngClass]="{ 'border-red-500': campoInvalido('nombreDeUsuario') }"/>
+                </label>
+  
+                <label class="flex flex-col font-bold gap-2">
+                  Contraseña
+                  <input type="password" formControlName="contrasena" placeholder="Ingrese la contraseña"
+                         class="p-inputtext w-full border-2 rounded-md p-2"
+                         [ngClass]="{ 'border-red-500': campoInvalido('contrasena') }"/>
+                </label>
+  
+                <div class="flex justify-between pt-4">
+                  <p-button (onClick)="activateCallback(1)" label="Atrás" icon="pi pi-arrow-left" severity="secondary"/>
+                  <p-button (onClick)="activateCallback(3)" label="Siguiente" icon="pi pi-arrow-right" iconPos="right"/>
+                </div>
+              </div>
+            </ng-template>
+          </p-step-panel>
+  
+          <!-- Paso 3 -->
+          <p-step-panel [value]="3">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-4 max-w-lg mx-auto text-center">
+                <p class="text-lg font-semibold">¿Deseas guardar los cambios?</p>
+                <div class="flex justify-between pt-4">
+                  <p-button (onClick)="activateCallback(2)" label="Atrás" icon="pi pi-arrow-left" severity="secondary"/>
+                  <p-button type="submit" label="{{ tipo }}" icon="pi pi-save" styleClass="bg-green-600 text-white"/>
+                </div>
+              </div>
+            </ng-template>
+          </p-step-panel>
+        </p-step-panels>
+      </p-stepper>
+    </form>
+  </p-dialog>
+  

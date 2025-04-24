@@ -1,1 +1,27 @@
-<p>question works!</p>
+<section id="questions" class="w-full py-12 md:py-24 lg:py-32 flex justify-center">
+    <div class="container px-4 md:px-6">
+        <div class="flex flex-col items-center justify-center space-y-4 text-center">
+            <div class="space-y-2">
+                <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Preguntas Frecuentes</h2>
+                <p class="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Encuentra respuestas a las preguntas más comunes sobre nuestro programa de mentorías.
+                </p>
+            </div>
+        </div>
+        <!-- Tarjetas de preguntas en diseño responsive -->
+        <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <!-- Bucle de preguntas -->
+            @for (question of questionList; track question.id) {
+                
+                <p-accordion  [activeIndex]="0">
+                    <p-accordionTab [header]="question.label" class="!shadow-sm" >
+                        <p class="text-letra-gris-oscuro">
+                            {{question.description}}
+                        </p>
+                    </p-accordionTab>
+                </p-accordion>
+                
+            }
+        </main>
+    </div>
+</section>
