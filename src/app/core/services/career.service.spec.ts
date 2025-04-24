@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GenericService } from './generic.service';
+import { CareerService } from './career.service';
 
-describe('GenericService', () => {
-  /*let service: GenericService;
+describe('CareerService', () => {
+  let service: CareerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GenericService);
+    service = TestBed.inject(CareerService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });*/
+  });
 });

@@ -1,10 +1,10 @@
 <header 
   [ngClass]="{ 'bg-negro': isScrolled || alwaysFixed }"
-  class="flex justify-center px-2 py-2 w-full fixed top-0 z-50 transition-colors duration-500 ease-in-out">
+  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
   <div class="w-1000 h-11 flex justify-between items-center">
     <div class="flex gap-2 justify-center">
       <div class="block w-1 rounded-sm bg-fondo-verde"></div>
-      <a class="text-letra-blanca text-3xl font-bold" [routerLink]="['/']">Mentoria</a>
+      <a class="text-xl font-bold" [routerLink]="['/']">Mentoria</a>
     </div>
     <!-- Botón de hamburguesa para pantallas pequeñas -->
     <button 
@@ -14,10 +14,10 @@
       <i class="pi pi-bars text-2xl"></i>
     </button>
 
-    <nav class="items-center gap-4 hidden lg:flex">
+    <nav class="hidden md:flex gap-6">
       @for (option of listaDeOpciones; track option.id) {
         <a 
-          class="text-lg text-letra-blanca font-semibold no-underline border-b-2 border-transparent hover:border-b-2 hover:border-fondo-verde box-border transition duration-300" 
+          class="text-sm font-medium hover:underline underline-offset-4" 
           [routerLink]="'/'" [fragment]="option.url">
           {{option.label}}
         </a>
