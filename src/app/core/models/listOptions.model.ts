@@ -11,7 +11,8 @@ export interface Options {
     id: number,
     icon: string,
     label: string,
-    url: string
+    url: string,
+    roles?: string[],
 }
 
 export interface Option {

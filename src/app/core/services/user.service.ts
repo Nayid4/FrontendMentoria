@@ -12,4 +12,7 @@ export class UserService extends GenericService<User, UserCommand> {
     super(http);
     this.endpoint = "user";
   }
+
+  changePassword(): void {
+  }
 }
