@@ -43,12 +43,12 @@
                 <label class="flex flex-col gap-1 text-letra-negra font-normal">
                   Usuario
                   <input
-                    id="nombreDeUsuario"
-                    formControlName="nombreDeUsuario"
+                    id="userName"
+                    formControlName="userName"
                     [ngClass]="{
                       error:
-                        formulario.get('nombreDeUsuario')?.invalid &&
-                        formulario.get('nombreDeUsuario')?.touched
+                        formulario.get('userName')?.invalid &&
+                        formulario.get('userName')?.touched
                     }"
                     type="text"
                     required
@@ -59,12 +59,12 @@
                 <label class="flex flex-col gap-1 text-letra-negra font-normal">
                   Contraseña
                   <input
-                    id="contrasena"
-                    formControlName="contrasena"
+                    id="password"
+                    formControlName="password"
                     [ngClass]="{
                       error:
-                        formulario.get('contrasena')?.invalid &&
-                        formulario.get('contrasena')?.touched
+                        formulario.get('password')?.invalid &&
+                        formulario.get('password')?.touched
                     }"
                     type="password"
                     required
