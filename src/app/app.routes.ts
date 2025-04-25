@@ -6,17 +6,17 @@ import { authGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
     {
         path: '',
-        //canActivate: [noAuthGuard],
+        canActivate: [noAuthGuard],
         loadChildren: () => import('./pages/user/user.routes').then(m => m.USER_ROUTES)
     },
     {
         path: 'autenticacion',
-        //canActivate: [noAuthGuard],
+        canActivate: [noAuthGuard],
         loadChildren: () => import('./pages/auth/auth.routes').then(m => m.AUTH_ROUTES)
     },
     {
         path: 'dashboard',
-        //canActivate: [authGuard],
+        canActivate: [authGuard],
         loadChildren: () => import('./pages/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
     },
     {

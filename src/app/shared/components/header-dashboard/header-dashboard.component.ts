@@ -58,6 +58,12 @@ export class HeaderDashboardComponent  implements OnInit{
 
     this.items = [
       {
+        label: 'Reestablecer Contraseña',
+        command: () => {
+          this.router.navigate(['/dashboard/user/reset-password'])
+        }
+      },
+      {
         label: 'Cerrar Sesión',
         command: () => {
           this.servicioAute.cerrarSesion()
