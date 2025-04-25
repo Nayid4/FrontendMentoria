@@ -21,17 +21,13 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*this.userService.
+    this.authService.dataAuthenticated$
     .subscribe({
       next: (resp) => {
-        this.inicializarFormulario();
-        this.cargarDatosIniciales();
-
-        // Escuchar cambios en el campo de búsqueda
-        this.formularioConsulta.get('busqueda')?.valueChanges.subscribe((valor) => {
-          this.busqueda = valor; // Almacena el valor en la variable 'busqueda'
-        });
+        //this.user = resp;
       }
-    })*/
+    })
   }
+
+
 }

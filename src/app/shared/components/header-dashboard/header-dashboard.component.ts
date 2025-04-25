@@ -46,7 +46,7 @@ export class HeaderDashboardComponent  implements OnInit{
       next: (datos) => {
         if (datos && datos.name) {
           this.inicial = datos.name[0]; 
-          this.nombre = datos.name + ' ' + datos.lastName;
+          this.nombre = datos.name + ' - ' + datos.role;
         } else {
           this.inicial = 'A';  
           this.nombre = '';
