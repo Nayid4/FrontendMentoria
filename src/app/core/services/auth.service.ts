@@ -17,7 +17,7 @@ export class AuthService {
   private readonly TOKEN_NAME = 'token';
   private readonly REFRESH_TOKEN_NAME = 'refreshToken';
   private readonly apiUrl = environment.apiUrl;
-  private readonly endpoint = 'autenticacion';
+  private readonly endpoint = 'auth';
   private authenticatedSubject = new BehaviorSubject<boolean>(!!this.token);
   private userSubject = new BehaviorSubject<DataUser>({} as DataUser);
   
@@ -81,7 +81,7 @@ export class AuthService {
   }
 
   IniciarSesion(data: LoginIn): Observable<TokenUser> {
-    return this.http.post<TokenUser>(`${this.apiUrl}/${this.endpoint}/iniciar-sesion`, data).pipe(
+    return this.http.post<TokenUser>(`${this.apiUrl}/${this.endpoint}/login-in`, data).pipe(
       tap(resp => {
         this.token = resp.token;
         this.refreshToken = resp.refreshToken
@@ -91,11 +91,11 @@ export class AuthService {
 
   RefreshToken(): Observable<TokenUser> {
     // Mandar el refresh token en el encabezado
-    return this.http.get<TokenUser>(`${this.apiUrl}/${this.endpoint}/refrescar-token`)
+    return this.http.get<TokenUser>(`${this.apiUrl}/${this.endpoint}/refresh-token`)
   }
 
   DataUser(): Observable<DataUser> {
-    return this.http.get<DataUser>(`${this.apiUrl}/${this.endpoint}/datos-usuario`);
+    return this.http.get<DataUser>(`${this.apiUrl}/${this.endpoint}/data-user`);
   }
 
   cerrarSesion() {

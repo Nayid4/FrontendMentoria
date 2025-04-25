@@ -72,6 +72,7 @@ export class RegisterUserIndexComponent implements OnInit {
     this.formularioUsuario = this.fb.group({
       role: this.fb.group({
         id: ['', Validators.required],
+        name: [''],
       }),
       personalInformation: this.fb.group({
         dni: ['', Validators.required],
@@ -85,6 +86,7 @@ export class RegisterUserIndexComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         career: this.fb.group({
           id: ['', Validators.required],
+          name: [''],
         }),
         cicle: [1, Validators.required],
         expectative: ['', Validators.required],
@@ -148,7 +150,11 @@ export class RegisterUserIndexComponent implements OnInit {
       academicInformation: {
         code: formValue.academicInformation.code,
         email: formValue.academicInformation.email,
-        career: formValue.academicInformation.career.id,
+        career: {
+          id: formValue.academicInformation.career.id,
+          name: formValue.academicInformation.career.name,
+
+        },
         cicle: formValue.academicInformation.cicle,
         expectative: formValue.academicInformation.expectative,
       },
