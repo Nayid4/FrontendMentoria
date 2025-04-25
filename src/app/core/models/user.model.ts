@@ -12,7 +12,6 @@ export interface User {
   
 export interface UserCommand {
   role: Role;
-  userName: string;
   personalInformation: PersonalInformation;
   academicInformation: AcademicInformation;
 }

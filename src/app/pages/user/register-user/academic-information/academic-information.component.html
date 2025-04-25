@@ -1,1 +1,78 @@
-<p>academic-information works!</p>
+<div [formGroup]="AcademicForm" class="flex flex-col flex-1 gap-4 overflow-auto p-1">
+    <app-title-form [title]="this.title" />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <label for="code" class="flex flex-col gap-2 font-bold">
+            Codigo
+            <input 
+                formControlName="code" 
+                type="text"
+                placeholder="Ingrese su codigo"
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                [ngClass]="{'border-red-500': this.campoInvalido('code')}"
+            />
+        </label>
+
+        <label for="code" class="flex flex-col gap-2 font-bold">
+            Email
+            <input 
+                formControlName="email" 
+                type="email"
+                placeholder="Ingrese su Email"
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                [ngClass]="{'border-red-500': this.campoInvalido('email')}"
+            />
+        </label>
+
+        <div [formGroup]="CareerForm">
+            <label class="flex flex-col gap-1 text-letra-negra font-normal ">
+                Carrera
+                <p-select 
+                    [options]="careerList()" 
+                    formControlName="id" 
+                    optionLabel="name" 
+                    [filter]="true" 
+                    filterBy="name" 
+                    placeholder="Seleccione su carrera" 
+                    appendTo="body" 
+                    [ngClass]="{ 'border-red-500': campoInvalido('id') }" 
+                    class="w-full border-1 "
+                >
+                    <ng-template #selectedItem let-selectedOption>
+                        <div class="flex items-center gap-2">
+                            <div>{{ selectedOption.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-rol #item>
+                        <div class="flex items-center gap-2">
+                            <div>{{ rol.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-select>
+              </label>
+        </div>
+
+          <label for="cicle" class="flex flex-col gap-2 font-bold">
+            Ciclo
+            <input 
+                formControlName="cicle" 
+                type="number"
+                placeholder="Ingrese su Ciclo"
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                [ngClass]="{'border-red-500': this.campoInvalido('cicle')}"
+            />
+        </label>
+
+        <label for="dni" class="flex flex-col gap-2 font-bold md:col-span-3">
+            Expectativa
+            <textarea 
+                formControlName="expectative" 
+                type="number"
+                rows="5"
+                placeholder="Ingrese su expectativa"
+                class="w-full border-2 resize-none border-gray-300 rounded-md p-2! font-normal " 
+                [ngClass]="{'border-red-500': this.campoInvalido('expectative')}"
+            ></textarea>
+        </label>
+    </div>
+    
+</div>

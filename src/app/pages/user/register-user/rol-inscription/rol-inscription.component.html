@@ -1,0 +1,32 @@
+<div [formGroup]="roleForm" class="flex flex-col flex-1 gap-4 overflow-auto p-1">
+    <app-title-form [title]="this.title" />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <label class="flex flex-col gap-1 text-letra-negra font-normal ">
+            ¿Como desea inscribirse?
+            
+            <p-select 
+                [options]="roleList()" 
+                formControlName="id" 
+                optionLabel="name" 
+                [filter]="true" 
+                filterBy="name" 
+                placeholder="Seleccione un rol" 
+                appendTo="body" 
+                [ngClass]="{ 'border-red-500': campoInvalido('id') }" 
+                class="w-full border-1 "
+            >
+                <ng-template #selectedItem let-selectedOption>
+                    <div class="flex items-center gap-2">
+                        <div>{{ selectedOption.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-rol #item>
+                    <div class="flex items-center gap-2">
+                        <div>{{ rol.name }}</div>
+                    </div>
+                </ng-template>
+            </p-select>
+        </label>
+    </div>
+    
+</div>

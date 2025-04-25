@@ -136,7 +136,6 @@ export class UserFormComponent implements OnInit, OnChanges {
       this.actualizar.emit(usuarioActualizado);
     } else {
       const nuevoUsuario: UserCommand = {
-        userName: formValue.userName,
         role: formValue.role,
         personalInformation: formValue.personalInformation,
         academicInformation: formValue.academicInformation,
