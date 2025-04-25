@@ -15,6 +15,9 @@ import { ResumeInformationComponent } from "../resume-information/resume-informa
 import { ResultComponent } from '../result/result.component';
 import { UserService } from '../../../../core/services/user.service';
 import { MessageService } from 'primeng/api';
+import { Role } from '../../../../core/models/role.model';
+import { PersonalInformation } from '../../../../core/models/personalInformation.model';
+import { AcademicInformation } from '../../../../core/models/academicInformation.model';
 
 @Component({
   selector: 'app-register-user-index',
@@ -145,18 +148,20 @@ export class RegisterUserIndexComponent implements OnInit {
     const formValue = this.formularioUsuario.value;
 
     const nuevoUsuario: UserCommand = {
-      role: formValue.role.id,
-      personalInformation: formValue.personalInformation,
+      role: {
+        id: formValue.role.id.id,
+        name: formValue.role.id.id.name,
+      } ,
+      personalInformation: formValue.personalInformation as PersonalInformation,
       academicInformation: {
         code: formValue.academicInformation.code,
-        email: formValue.academicInformation.email,
         career: {
-          id: formValue.academicInformation.career.id,
-          name: formValue.academicInformation.career.name,
-
+          id: formValue.academicInformation.career.id.id,
+          name: formValue.academicInformation.career.id.id.name,
         },
         cicle: formValue.academicInformation.cicle,
-        expectative: formValue.academicInformation.expectative,
+        email: formValue.academicInformation.email,
+        expectative: formValue.academicInformation.expectative
       },
     };
 

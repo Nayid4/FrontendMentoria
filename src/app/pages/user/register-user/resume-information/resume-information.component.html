@@ -5,7 +5,7 @@
       <!-- Rol -->
       <div>
         <h3 class="text-xl font-bold text-gray-700">Rol</h3>
-        <p class="text-gray-600">{{ inscripcionForm?.value?.role?.name }}</p>
+        <p class="text-gray-600">{{ inscripcionForm?.value?.role?.id.name }}</p>
       </div>
   
       <!-- Información Personal -->
@@ -26,7 +26,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div><strong>Código:</strong> {{ inscripcionForm?.value?.academicInformation?.code }}</div>
           <div><strong>Email:</strong> {{ inscripcionForm?.value?.academicInformation?.email }}</div>
-          <div><strong>Carrera:</strong> {{ inscripcionForm?.value?.academicInformation?.career?.name }}</div>
+          <div><strong>Carrera:</strong> {{ inscripcionForm?.value?.academicInformation?.career?.id.name }}</div>
           <div><strong>Ciclo:</strong> {{ inscripcionForm?.value?.academicInformation?.cicle }}</div>
           <div class="md:col-span-2"><strong>Expectativas:</strong> {{ inscripcionForm?.value?.academicInformation?.expectative }}</div>
         </div>
