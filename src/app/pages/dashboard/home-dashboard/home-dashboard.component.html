@@ -1,0 +1,117 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+    <!-- Columna 1: Botones y contenedor principal -->
+    <div class="space-y-4">
+      <!-- Botones -->
+      <div class="flex justify-between space-x-2">
+        <div class="w-1/3 h-16 rounded-xl bg-gradient-to-br from-pink-300 to-blue-300"></div>
+        <div class="w-1/3 h-16 rounded-xl bg-purple-100 flex items-center justify-center font-bold text-lg">k!</div>
+        <div class="w-1/3 h-16 rounded-xl bg-green-100 flex items-center justify-center">
+          <i class="pi pi-phone text-green-500 text-2xl"></i>
+        </div>
+      </div>
+      <!-- Imagen o contenedor grande -->
+      <div class="bg-gray-300 h-[400px] rounded-xl flex items-center justify-center">
+        <i class="pi pi-image text-4xl opacity-30"></i>
+      </div>
+    </div>
+  
+    <!-- Columna 2: Credenciales y tarjeta -->
+    <div class="space-y-4">
+      <!-- Credenciales -->
+      <div class="bg-white rounded-xl shadow p-4 space-y-4">
+        <div class="flex justify-between items-center">
+          <span class="font-bold">Credenciales</span>
+          <!--<button class="px-3 py-1 border rounded flex items-center space-x-1">
+            <i class="pi pi-download"></i>
+            <span>Descargar</span>
+          </button>-->
+        </div>
+        <div>
+            <label class="text-sm">Usuario:</label>
+            <div class="flex justify-between items-center bg-gray-100 rounded p-2">
+              <span class="text-teal-600 font-bold">{{ user.userName }}</span>
+              <i
+                class="pi pi-copy cursor-pointer text-teal-600 hover:text-teal-800"
+                (click)="copiarUsuarioAlPortapapeles(user.userName)"
+                title="Copiar al portapapeles"
+              ></i>
+            </div>
+          </div>
+          
+        <!--<div>
+          <label class="text-sm">Contraseña:</label>
+          <div class="flex justify-between items-center bg-gray-100 rounded p-2">
+            <span>xxxxxxxxxxx</span>
+            <div class="flex items-center space-x-2">
+              <i class="pi pi-copy"></i>
+              <i class="pi pi-eye"></i>
+            </div>
+          </div>
+        </div>-->
+      </div>
+  
+      <!-- Tarjeta verde -->
+      <div class="bg-teal-600 text-white rounded-xl p-4 text-center space-y-4">
+        <h2 class="text-xl font-bold">NUEVO AMIGO EN CAMINO</h2>
+        <div class="flex justify-center">
+          <div class="bg-teal-700 p-4 rounded-full shadow-lg">
+            <i class="pi pi-phone text-2xl"></i>
+          </div>
+        </div>
+        <p>UN ALIADO EN TODA LA UNIVERSIDAD</p>
+        <p class="font-semibold">ES UN BUEN MOMENTO PARA CONOCER</p>
+      </div>
+  
+      <!-- Hora -->
+      <div class="bg-teal-100 text-teal-700 rounded-xl p-2 flex justify-center items-center space-x-2 text-lg">
+        <i class="pi pi-clock"></i>
+        <span>{{ horaActual }}</span>
+      </div>
+    </div>
+  
+    <!-- Columna 3: Buscar y lista -->
+    <div class="space-y-4">
+      <!-- Buscar -->
+      <div class="bg-white rounded-xl shadow p-4 space-y-4">
+        <h2 class="text-xl font-bold text-center">BUSCAR</h2>
+        <div class="flex justify-between items-center">
+          <span>URP LIBRE</span>
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-green-500"></div>
+          </label>
+        </div>
+        <select class="w-full p-2 border rounded text-center">
+          <option>MENTOR</option>
+        </select>
+      </div>
+  
+      <!-- Lista de mentores -->
+      <div class="space-y-2">
+        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
+          <span class="text-teal-500 font-bold">● MENTOR</span>
+          <span>916 812 604</span>
+        </div>
+        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
+          <span>● MENTOR</span>
+          <span>xxx xxx xxx</span>
+        </div>
+        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
+          <span>● MENTOR</span>
+          <span>xxx xxx xxx</span>
+        </div>
+        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
+          <span>● MENTOR</span>
+          <span>xxx xxx xxx</span>
+        </div>
+      </div>
+  
+      <!-- Botón buscar -->
+      <button class="w-full bg-gradient-to-r from-teal-400 to-emerald-500 text-white p-3 rounded-xl text-lg flex justify-center items-center space-x-2">
+        <i class="pi pi-search"></i>
+        <span>BUSCAR</span>
+        <i class="pi pi-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  
