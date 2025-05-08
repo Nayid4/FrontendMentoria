@@ -8,6 +8,7 @@ import { TokenUser } from '../models/token.model';
 import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginIn } from '../models/loginIn.model';
+import { ChangePassword } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -109,5 +110,9 @@ export class AuthService {
 
     this.authenticatedSubject.next(false);
     this.userSubject.next({} as DataUser);
+  }
+
+  ForgetPassword(changePassword : ChangePassword) : Observable<void>{
+    return this.http.put<void>(`${this.apiUrl}/${this.endpoint}/forget-password/${changePassword.id}`, changePassword);
   }
 }

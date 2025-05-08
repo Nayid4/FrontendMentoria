@@ -16,7 +16,7 @@ export interface UserCommand {
   academicInformation: AcademicInformation;
 }
   
-export interface changePassword {
+export interface ChangePassword {
   id: string,
   password: string,
   passwordVerify: string
