@@ -3,13 +3,13 @@
     'fixed z-50 md:static md:visible w-64': !isMenuVisible,
     'invisible w-0': isMenuVisible
   }"
-  class="bg-green-900 h-svh w-64 flex flex-col gap-2 transition-all duration-500 ease-in-out overflow-hidden"
+  class="bg-white h-svh w-72 flex flex-col gap-2 p-2 transition-all duration-500 ease-in-out overflow-hidden"
 >
   <div class="p-4! flex justify-center">
     <a
       [routerLink]="'/dashboard'"
       (click)="clearFocus()"
-      class="text-white font-bold text-4xl text-center py-2!"
+      class="text-black font-bold text-4xl text-center py-2!"
     >
       Mentoria
     </a>
@@ -26,16 +26,6 @@
   </div>
   <div class="h-svh">
     
-    <p-menu [model]="items" styleClass="bg-transparent! border-none! text-white!">
-      <ng-template #item let-item>
-        <a 
-        [routerLink]="item.routerLink"
-        pRipple class="flex items-center p-menu-item-link text-white! hover:text-gray-800! focus:text-gray-800!">
-            <span [class]="item.icon"></span>
-            <span class="ml-2">{{ item.label }}</span>
-            
-        </a>
-    </ng-template>
-  </p-menu>
+  <p-panelmenu [model]="items" styleClass="bg-transparent! border-none! text-white!" />
   </div>
 </div>
