@@ -1,1 +1,37 @@
-<p>attendance works!</p>
+<div class="p-6 bg-white rounded-lg shadow">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">PROGRAMAS URP</h1>
+      <p class="text-sm text-gray-600">Edite y genere certificados para los alumnos que cumplieron los requisitos</p>
+    </div>
+    <button pButton type="button" icon="pi pi-plus" label="Nueva Constancia" class="p-button p-button-sm p-button-primary"></button>
+  </div>
+
+  <div class="mb-4">
+    <input type="text" pInputText placeholder="Buscar" class="w-full p-inputtext-sm" />
+  </div>
+
+  <p-table [value]="programas" [paginator]="false" class="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Participantes</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-programa>
+      <tr>
+        <td class="font-medium text-blue-700">{{ programa.nombre }}</td>
+        <td>{{ programa.tipo }}</td>
+        <td>{{ programa.fecha }}</td>
+        <td>{{ programa.participantes }}</td>
+        <td class="space-x-2">
+          <button pButton type="button" icon="pi pi-pencil" label="Editar" class="p-button-outlined p-button-sm"></button>
+          <button pButton type="button" icon="pi pi-download" label="Descargar Todos" class="p-button-outlined p-button-sm p-button-secondary"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

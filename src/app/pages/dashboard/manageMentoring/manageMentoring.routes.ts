@@ -3,6 +3,7 @@ import { ManageMentoringLayoutComponent } from "./manage-mentoring-layout/manage
 import { AssignmentComponent } from "./assignment/assignment.component";
 import { RegisterWorkshopComponent } from "../manageActivity/register-workshop/register-workshop.component";
 import { PreposalsComponent } from "./preposals/preposals.component";
+import { RegsiterReportComponent } from "./regsiter-report/regsiter-report.component";
 
 export const MANAGE_MENTORING_ROUTES: Routes = [
     {
@@ -14,8 +15,8 @@ export const MANAGE_MENTORING_ROUTES: Routes = [
                 component: AssignmentComponent
             },
             {
-                path: 'registrar-taller',
-                component: RegisterWorkshopComponent
+                path: 'registrar-informe',
+                component: RegsiterReportComponent
             },
             {
                 path: 'propuestas',

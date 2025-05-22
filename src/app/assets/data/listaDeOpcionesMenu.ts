@@ -96,7 +96,7 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         id: 2,
         icon: "pi pi-chart-line", // Estado actual
         label: "Estado Actual",
-        url: "/dashboard/mentoria/estado-actual",
+        url: "/dashboard/seguimiento/estado-actual",
         roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]
@@ -137,14 +137,14 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     id: 6,
     icon: "pi pi-graduation-cap", // Certificaciones
     label: "Certificaciones",
-    url: "/dashboard/cetificacion",
+    url: "/dashboard/certificacion",
     roles: ["Administrador", "Mentor", "Ingresante"],
     options: [
       {
         id: 2,
         icon: "pi pi-send", // Solicitud de certificado
         label: "Solicitud",
-        url: "/dashboard/ceritifacion/solicitud",
+        url: "/dashboard/certificacion/solicitud",
         roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]
