@@ -8,9 +8,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-application-certification',
+  standalone: true,
   imports: [
     DropdownModule,
     CalendarModule,
@@ -26,10 +26,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class ApplicationCertificationComponent {
   certificado = {
-    tipo: null,
-    programa: null,
-    fecha: null,
-    horas: null
+    tipo: null as string | null,
+    programa: null as string | null,
+    fecha: null as Date | null,
+    horas: null as number | null
   };
 
   tiposCertificado = [
@@ -38,10 +38,10 @@ export class ApplicationCertificationComponent {
   ];
 
   programas = [
-    { label: 'Desarrollo Web con React', value: 'react' },
-    { label: 'Introducción a Python', value: 'python' },
-    { label: 'Voluntariado Ambiental', value: 'voluntariado' },
-    { label: 'Diseño UX/UI', value: 'uxui' }
+    { label: 'Desarrollo Web con React', value: 'Desarrollo Web con React' },
+    { label: 'Introducción a Python', value: 'Introducción a Python' },
+    { label: 'Voluntariado Ambiental', value: 'Voluntariado Ambiental' },
+    { label: 'Diseño UX/UI', value: 'Diseño UX/UI' }
   ];
 
   participantes = [
@@ -52,9 +52,14 @@ export class ApplicationCertificationComponent {
   ];
 
   seleccionados: { nombre: string; codigo: string; estado: string }[] = [];
+  seleccionadoParaVista: { nombre: string; codigo: string; estado: string } | null = null;
 
-
-  seleccionarTodos() {
+  seleccionarTodos(): void {
     this.seleccionados = [...this.participantes];
+    this.seleccionadoParaVista = this.seleccionados.length > 0 ? this.seleccionados[0] : null;
+  }
+
+  cambiarVistaManual(participante: { nombre: string; codigo: string; estado: string }): void {
+    this.seleccionadoParaVista = participante;
   }
 }

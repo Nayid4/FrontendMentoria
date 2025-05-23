@@ -59,27 +59,27 @@
   <p-dialog header="{{ editMode ? 'Editar Taller' : 'Nuevo Taller' }}" [(visible)]="showDialog" [modal]="true" [closable]="false" [style]="{ width: '500px' }">
     <div class="flex flex-col !gap-4">
       <div>
-        <label class="block text-sm mb-1">Nombre</label>
+        <label class="block text-sm !mb-1">Nombre</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.nombre" class="w-full" />
       </div>
       <div>
-        <label class="block text-sm mb-1">Rango de Fechas</label>
+        <label class="block text-sm !mb-1">Rango de Fechas</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.rangoFechas" class="w-full" placeholder="Ej: 1 Mayo – 30 Junio, 2025" />
       </div>
       <div>
-        <label class="block text-sm mb-1">Días</label>
+        <label class="block text-sm !mb-1">Días</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.dias" class="w-full" placeholder="Ej: Lunes y Miércoles" />
       </div>
       <div>
-        <label class="block text-sm mb-1">Horario</label>
+        <label class="block text-sm !mb-1">Horario</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.horario" class="w-full" placeholder="Ej: 15:00 – 17:00" />
       </div>
       <div>
-        <label class="block text-sm mb-1">Lugar</label>
+        <label class="block text-sm !mb-1">Lugar</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.lugar" class="w-full" />
       </div>
       <div>
-        <label class="block text-sm mb-1">Capacidad</label>
+        <label class="block text-sm !mb-1">Capacidad</label>
         <input type="text" pInputText [(ngModel)]="tallerForm.capacidad" class="w-full" placeholder="Ej: 30/30 participantes" />
       </div>
       <div class="flex justify-end !gap-2">
