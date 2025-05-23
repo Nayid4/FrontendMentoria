@@ -1,1 +1,49 @@
-<p>meeting works!</p>
+<div class="p-6 bg-white rounded-lg shadow">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">Programar Reuniones</h1>
+      <p class="text-sm text-gray-600">Agende, modifique y cancele reuniones con gestión de disponibilidad horaria.</p>
+    </div>
+    <button pButton icon="pi pi-plus" label="Nueva Reunión" class="p-button-sm bg-black text-white border-black hover:bg-gray-800"></button>
+  </div>
+
+  <!-- Tabs -->
+  <p-tabView>
+    <p-tabPanel header="Próximas">
+      @for (reunion of reuniones; track $index) {
+        <div class="mb-4 border rounded-lg shadow-sm p-4">
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">{{ reunion.titulo }}</h2>
+            <p class="text-sm text-gray-500">{{ reunion.descripcion }}</p>
+          </div>
+          <div class="flex gap-2">
+            <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined p-button-secondary"></button>
+            <button pButton icon="pi pi-trash" class="p-button-sm p-button-outlined p-button-danger"></button>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between text-sm text-gray-600 mb-3">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-calendar"></i>
+            {{ reunion.fecha }}
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="pi pi-clock"></i>
+            {{ reunion.hora }}
+          </div>
+        </div>
+        <button pButton label="Ver detalles" class="p-button-sm bg-black text-white border-black hover:bg-gray-800 w-full"></button>
+      </div>
+      }
+    </p-tabPanel>
+
+    <p-tabPanel header="Pasadas">
+      <p class="text-gray-500 italic">No hay reuniones pasadas.</p>
+    </p-tabPanel>
+
+    <p-tabPanel header="Canceladas">
+      <p class="text-gray-500 italic">No hay reuniones canceladas.</p>
+    </p-tabPanel>
+  </p-tabView>
+</div>
