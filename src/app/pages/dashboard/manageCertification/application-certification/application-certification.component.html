@@ -1,1 +1,67 @@
-<p>application-certification works!</p>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 bg-white rounded-lg shadow">
+  <!-- Formulario -->
+  <div>
+    <h2 class="text-xl font-bold mb-1">Generar Todos los Certificados</h2>
+    <p class="text-sm text-gray-600 mb-4">Genere certificados para todos los participantes de un programa o taller.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Tipo de Certificado</label>
+        <p-dropdown [options]="tiposCertificado" placeholder="Seleccione tipo" [(ngModel)]="certificado.tipo" class="w-full"></p-dropdown>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Programa/Taller</label>
+        <p-dropdown [options]="programas" placeholder="Seleccione programa o taller" [(ngModel)]="certificado.programa" class="w-full"></p-dropdown>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Fecha de Emisión</label>
+        <p-calendar [(ngModel)]="certificado.fecha" dateFormat="dd/mm/yy" class="w-full" showIcon></p-calendar>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Horas/Créditos</label>
+        <input pInputText type="number" class="w-full" placeholder="Ej: 20" [(ngModel)]="certificado.horas" />
+      </div>
+    </div>
+
+    <!-- Tabla de participantes -->
+    <p-table [value]="participantes" [(selection)]="seleccionados" dataKey="codigo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3em">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th>Nombre</th>
+          <th>Código</th>
+          <th>Estado</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-participante>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="participante"></p-tableCheckbox>
+          </td>
+          <td>{{ participante.nombre }}</td>
+          <td>{{ participante.codigo }}</td>
+          <td>
+            <span [ngClass]="{
+              'text-green-600': participante.estado === 'Completado',
+              'text-gray-500': participante.estado !== 'Completado'
+            }">{{ participante.estado }}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- Botones -->
+    <div class="mt-4 flex gap-3">
+      <button pButton label="Seleccionar Todos" class="p-button-secondary p-button-sm" (click)="seleccionarTodos()"></button>
+      <button pButton label="Cancelar" class="p-button-outlined p-button-sm"></button>
+      <button pButton label="Generar Certificados" icon="pi pi-check" class="p-button-sm p-button-primary"></button>
+    </div>
+  </div>
+
+  <!-- Previsualización del certificado -->
+  <div class="border rounded-lg overflow-hidden shadow">
+    <img src="assets/preview-certificado.png" alt="Previsualización del certificado" class="w-full object-contain" />
+  </div>
+</div>
