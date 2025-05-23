@@ -1,1 +1,54 @@
-<p>register-workshop works!</p>
+<div class="p-6 bg-white rounded-lg shadow">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">Registrar Talleres</h1>
+      <p class="text-sm text-gray-600">Cree y configure talleres incluyendo detalles como proceso de selección y capacidad.</p>
+    </div>
+    <button pButton icon="pi pi-plus" label="Nuevo Taller" class="p-button-sm bg-black text-white border-black hover:bg-gray-800"></button>
+  </div>
+
+  <!-- Tabs -->
+  <p-tabView>
+    <p-tabPanel header="Activos">
+      <div class="space-y-4">
+        @for (taller of talleresActivos; track $index) {
+            <div  class="border rounded-lg shadow-sm p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h2 class="text-lg font-semibold text-gray-800">{{ taller.nombre }}</h2>
+            <button pButton icon="pi pi-pencil" class="p-button-outlined p-button-sm p-button-secondary"></button>
+          </div>
+
+          <div class="text-sm text-gray-600 mb-2">
+            <div class="flex items-center gap-2">
+              <i class="pi pi-calendar"></i>
+              {{ taller.rangoFechas }} – {{ taller.dias }}, {{ taller.horario }}
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="pi pi-map-marker"></i>
+              {{ taller.lugar }}
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="pi pi-users"></i>
+              {{ taller.capacidad }}
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button pButton label="Ver detalles" class="p-button-outlined p-button-sm"></button>
+            <button pButton label="Gestionar participantes" class="p-button-sm bg-black text-white border-black hover:bg-gray-800"></button>
+          </div>
+        </div>
+        }
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Próximos">
+      <p class="text-gray-500 italic">No hay talleres próximos.</p>
+    </p-tabPanel>
+
+    <p-tabPanel header="Finalizados">
+      <p class="text-gray-500 italic">No hay talleres finalizados.</p>
+    </p-tabPanel>
+  </p-tabView>
+</div>
