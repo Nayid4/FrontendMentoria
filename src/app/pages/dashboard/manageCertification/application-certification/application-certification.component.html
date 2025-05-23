@@ -24,7 +24,7 @@
     </div>
 
     <!-- Tabla de participantes -->
-    <p-table [value]="participantes" [(selection)]="seleccionados" dataKey="codigo">
+    <p-table [value]="participantes" [(selection)]="seleccionados" dataKey="codigo" selectionMode="multiple">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3em">
@@ -35,8 +35,8 @@
           <th>Estado</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-participante>
-        <tr>
+      <ng-template pTemplate="body" let-participante let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="participante">
           <td>
             <p-tableCheckbox [value]="participante"></p-tableCheckbox>
           </td>
@@ -61,7 +61,23 @@
   </div>
 
   <!-- Previsualización del certificado -->
-  <div class="border rounded-lg overflow-hidden shadow">
-    <img src="assets/preview-certificado.png" alt="Previsualización del certificado" class="w-full object-contain" />
+  <div class="border rounded-lg overflow-hidden shadow bg-gray-50 p-4 flex flex-col gap-4 items-center">
+    <h3 class="text-lg font-semibold text-gray-700">Vista previa del certificado</h3>
+    <div class="bg-white border shadow-md rounded-md w-full max-w-xl p-6 text-center">
+      <p class="text-sm text-gray-500">{{ certificado.tipo || 'Tipo de certificado' }}</p>
+      <h2 class="text-2xl font-bold text-gray-800 mt-2">{{ seleccionadoParaVista?.nombre || 'Nombre del participante' }}</h2>
+      <p class="text-sm text-gray-600">ha completado satisfactoriamente el programa</p>
+      <p class="text-base text-gray-700 font-medium mt-1">{{ certificado.programa || 'Nombre del taller' }}</p>
+      <p class="text-sm text-gray-500 mt-2">Fecha: {{ certificado.fecha ? (certificado.fecha | date:'dd/MM/yyyy') : '...' }}</p>
+      <p class="text-sm text-gray-500">Duración: {{ certificado.horas || '...' }} horas</p>
+    </div>
+    <p-dropdown
+      [options]="seleccionados"
+      [(ngModel)]="seleccionadoParaVista"
+      optionLabel="nombre"
+      placeholder="Previsualizar como..."
+      class="w-full max-w-sm"
+      (onChange)="cambiarVistaManual($event.value)"
+    ></p-dropdown>
   </div>
 </div>
