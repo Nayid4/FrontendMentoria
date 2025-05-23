@@ -1,11 +1,11 @@
-<div class="p-6 bg-white rounded-lg shadow">
+<div class="p-6 !bg-white !rounded-lg !shadow">
   <!-- Encabezado -->
-  <div class="flex justify-between items-center mb-6">
+  <div class="flex justify-between items-center !mb-6">
     <div>
       <h1 class="text-2xl font-bold text-gray-800">Registrar Talleres</h1>
       <p class="text-sm text-gray-600">Cree y configure talleres incluyendo detalles como proceso de selección y capacidad.</p>
     </div>
-    <button pButton icon="pi pi-plus" label="Nuevo Taller" class="p-button-sm bg-black text-white border-black hover:bg-gray-800"></button>
+    <button pButton icon="pi pi-plus" label="Nuevo Taller" (click)="abrirDialog()" class="p-button-sm !bg-black !text-white !border-black hover:!bg-gray-800"></button>
   </div>
 
   <!-- Tabs -->
@@ -13,13 +13,16 @@
     <p-tabPanel header="Activos">
       <div class="space-y-4">
         @for (taller of talleresActivos; track $index) {
-            <div  class="border rounded-lg shadow-sm p-4">
-          <div class="flex justify-between items-start mb-2">
+            <div class="border !rounded-lg !shadow-sm !p-4">
+          <div class="flex justify-between items-start !mb-2">
             <h2 class="text-lg font-semibold text-gray-800">{{ taller.nombre }}</h2>
-            <button pButton icon="pi pi-pencil" class="p-button-outlined p-button-sm p-button-secondary"></button>
+            <div class="flex gap-2">
+              <button pButton icon="pi pi-pencil" class="p-button-outlined p-button-sm p-button-secondary" (click)="abrirDialog(taller, $index)"></button>
+              <button pButton icon="pi pi-trash" class="p-button-outlined p-button-sm p-button-danger" (click)="eliminarTaller($index)"></button>
+            </div>
           </div>
 
-          <div class="text-sm text-gray-600 mb-2">
+          <div class="text-sm text-gray-600 !mb-2">
             <div class="flex items-center gap-2">
               <i class="pi pi-calendar"></i>
               {{ taller.rangoFechas }} – {{ taller.dias }}, {{ taller.horario }}
@@ -36,7 +39,7 @@
 
           <div class="flex gap-2">
             <button pButton label="Ver detalles" class="p-button-outlined p-button-sm"></button>
-            <button pButton label="Gestionar participantes" class="p-button-sm bg-black text-white border-black hover:bg-gray-800"></button>
+            <button pButton label="Gestionar participantes" class="p-button-sm !bg-black !text-white !border-black hover:!bg-gray-800"></button>
           </div>
         </div>
         }
@@ -51,4 +54,38 @@
       <p class="text-gray-500 italic">No hay talleres finalizados.</p>
     </p-tabPanel>
   </p-tabView>
+
+  <!-- Diálogo Crear / Editar -->
+  <p-dialog header="{{ editMode ? 'Editar Taller' : 'Nuevo Taller' }}" [(visible)]="showDialog" [modal]="true" [closable]="false" [style]="{ width: '500px' }">
+    <div class="flex flex-col !gap-4">
+      <div>
+        <label class="block text-sm mb-1">Nombre</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.nombre" class="w-full" />
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Rango de Fechas</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.rangoFechas" class="w-full" placeholder="Ej: 1 Mayo – 30 Junio, 2025" />
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Días</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.dias" class="w-full" placeholder="Ej: Lunes y Miércoles" />
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Horario</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.horario" class="w-full" placeholder="Ej: 15:00 – 17:00" />
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Lugar</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.lugar" class="w-full" />
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Capacidad</label>
+        <input type="text" pInputText [(ngModel)]="tallerForm.capacidad" class="w-full" placeholder="Ej: 30/30 participantes" />
+      </div>
+      <div class="flex justify-end !gap-2">
+        <button pButton label="Cancelar" (click)="showDialog = false" class="p-button-outlined p-button-sm"></button>
+        <button pButton label="Guardar" (click)="guardarTaller()" class="p-button-sm !bg-black !text-white !border-black hover:!bg-gray-800"></button>
+      </div>
+    </div>
+  </p-dialog>
 </div>
