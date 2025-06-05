@@ -5,11 +5,9 @@
         <p-stepper [value]="1" class="">
 
             <p-step-list>
-                <p-step [value]="1">Rol</p-step>
-                <p-step [value]="2">Inormacion Personal</p-step>
-                <p-step [value]="3">Informacion Academica</p-step>
-                <p-step [value]="4">Resumen</p-step>
-                <p-step [value]="5">Resultado</p-step>
+                @for (head of stepHeadList; track $index) {
+                    <p-step [value]="head.id"> {{ head.name }} </p-step>
+                }
             </p-step-list>
 
             <p-step-panels>

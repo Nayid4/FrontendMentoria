@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-meeting',
@@ -13,7 +15,8 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     DialogModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    InputTextModule
   ],
   templateUrl: './meeting.component.html',
   styleUrl: './meeting.component.css'
