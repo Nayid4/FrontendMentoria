@@ -40,6 +40,15 @@ import { AcademicInformation } from '../../../../core/models/academicInformation
 export class RegisterUserIndexComponent implements OnInit {
   formularioUsuario!: FormGroup;
 
+  stepHeadList: { id: number; name: string; component: any }[] = [
+    { id: 1, name: 'Rol', component: RolInscriptionComponent },
+    { id: 2, name: 'Información Personal', component: PersonalInformationComponent },
+    { id: 3, name: 'Información Académica', component: AcademicInformationComponent },
+    { id: 4, name: 'Resumen', component: ResumeInformationComponent },
+    { id: 5, name: 'Resultado', component: ResultComponent },
+  ];
+
+
   constructor(
     private roleService: RoleService,
     private careerService: CareerService,

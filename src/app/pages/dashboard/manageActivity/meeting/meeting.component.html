@@ -1,4 +1,4 @@
-<div class="p-6 !bg-white !rounded-lg !shadow">
+<div class="!p-6 !bg-white !rounded-lg !shadow">
   <!-- Encabezado -->
   <div class="flex justify-between items-center !mb-6">
     <div>
@@ -17,7 +17,7 @@
   <!-- Tabs -->
   <p-tabView>
     <p-tabPanel header="Próximas">
-      <div class="space-y-4">
+      <div class="!space-y-4">
         @for (reunion of reuniones; track $index) {
             <div
           
@@ -93,7 +93,7 @@
         />
       </div>
       <div>
-        <label class="block text-sm mb-1">Descripción</label>
+        <label class="block text-sm !mb-1">Descripción</label>
         <textarea
           pInputTextarea
           rows="2"
@@ -102,7 +102,7 @@
         ></textarea>
       </div>
       <div>
-        <label class="block text-sm mb-1">Fecha</label>
+        <label class="block text-sm !mb-1">Fecha</label>
         <input
           type="text"
           pInputText
@@ -112,7 +112,7 @@
         />
       </div>
       <div>
-        <label class="block text-sm mb-1">Horario</label>
+        <label class="block text-sm !mb-1">Horario</label>
         <input
           type="text"
           pInputText
