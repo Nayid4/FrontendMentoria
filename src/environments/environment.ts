@@ -1,4 +1,4 @@
 export const environment = {
-    apiUrl: 'https://mentoriaurps.azurewebsites.net',
+    apiUrl: 'https://mentoriaurp.azurewebsites.net',
     production: true,
 };
