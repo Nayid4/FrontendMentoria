@@ -1,0 +1,18 @@
+<p-dialog header="{{title}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" (onHide)="closeDialog()">
+    <span class="p-text-secondary block mb-5!">{{actionType}} role information.</span>
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+        <label class="flex flex-col gap-2 font-bold">
+            Name
+            <input type="text" formControlName="name"
+                placeholder="Enter role name"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                [ngClass]="{'border-red-500': isInvalidField('name')}"
+            />
+            <span *ngIf="isInvalidField('name')" class="text-red-600 text-xs">This field is required</span>
+        </label>
+        <div class="flex justify-end gap-2 mt-4!">
+            <p-button type="button" label="Cancel" severity="secondary" (click)="closeDialog()"></p-button>
+            <p-button type="submit" [label]="actionType"></p-button>
+        </div>
+    </form>
+</p-dialog>

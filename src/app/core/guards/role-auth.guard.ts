@@ -13,6 +13,6 @@ export const roleAuthGuard: CanActivateFn = (route, state) => {
   }
 
   return authService.DataUser().pipe(
-    map((resp: DataUser) =>  Boolean(resp && resp.rol.includes(roles)))
+    map((resp: DataUser) =>  Boolean(resp && resp.role.includes(roles)))
   )
 };
