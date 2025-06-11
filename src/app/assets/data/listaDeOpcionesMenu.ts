@@ -40,7 +40,30 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     ]
   },
   {
-    id: 22,
+    id: 226,
+    icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
+    label: "Datos Basicos",
+    url: "/dashboard/basicos",
+    roles: ["Administrador", "Mentor", "Ingresante"],
+    options: [
+      {
+        id: 1,
+        icon: "pi pi-user-plus", // Asignación
+        label: "Roles",
+        url: "/dashboard/basicos/roles",
+        roles: ["Administrador", "Mentor", "Ingresante"],
+      },
+      {
+        id: 2,
+        icon: "pi pi-file-edit", // Registrar informe
+        label: "Carreras",
+        url: "/dashboard/basicos/carreras",
+        roles: ["Administrador", "Mentor", "Ingresante"],
+      }
+    ]
+  },
+  {
+    id: 24,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
     label: "Recocnocimiento",
     url: "/dashboard/reconocimiento",

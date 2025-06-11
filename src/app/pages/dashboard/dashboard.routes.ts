@@ -67,6 +67,13 @@ export const DASHBOARD_ROUTES: Routes = [
             (m) => m.MANAGE_MENTORING_ROUTES
           ),
       },
+      {
+        path: 'basicos',
+        loadChildren: () =>
+          import('./manageBasic/manageBasic.routes').then(
+            (m) => m.MANAGE_BASIC_ROUTES
+          ),
+      }
     ],
   },
 ];

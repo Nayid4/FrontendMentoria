@@ -3,6 +3,8 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { FilterQuery } from '../models/filterQuery.model';
+import { PageList } from '../models/PageList.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,17 @@ export class GenericService<T, Tl> {
   private UpdateSource = new BehaviorSubject<T | null>(null);
   Updated$ = this.UpdateSource.asObservable();
 
-  private RegistroSource = new BehaviorSubject<Tl | null>(null);
+  private RegistroSource = new BehaviorSubject<Tl | T | null >(null);
   Registro$ = this.RegistroSource.asObservable();
 
   constructor(protected http: HttpClient) { }
 
   GetAll(): Observable<T[]> {
     return this.http.get<T[]>(`${this.api}/${this.endpoint}`);
+  }
+
+  GetByFilter(filter: FilterQuery): Observable<PageList<T>> {
+    return this.http.post<PageList<T>>(`${this.api}/${this.endpoint}/list-filter`, filter);
   }
 
   GetById(id: string): Observable<T>{
@@ -45,7 +51,7 @@ export class GenericService<T, Tl> {
     this.UpdateSource.next(entidad);
   }
 
-  notifyRegistro(entidad: Tl) {
+  notifyRegistro(entidad: Tl | T) {
     
     this.RegistroSource.next(entidad);
   }
