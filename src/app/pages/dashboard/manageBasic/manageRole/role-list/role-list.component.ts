@@ -94,14 +94,14 @@ export class RoleListComponent implements OnInit, OnDestroy {
   }
 
   loadWithFilter() {
-    console.log('Loading roles with filter:', this.filterQuery);
     this.service
       .GetByFilter(this.filterQuery)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (resp: PageList<Role>) => {
           this.pageList = resp;
-          console.log('PageList:', this.pageList.elements);
+          this.first = (resp.page - 1) * resp.sizePage;
+          this.rows = resp.sizePage;
         },
       });
   }

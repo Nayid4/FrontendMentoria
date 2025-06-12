@@ -8,6 +8,7 @@ export interface User {
     userName: string;
     personalInformation: PersonalInformation;
     academicInformation: AcademicInformation;
+    state: string
 }
   
 export interface UserCommand {
@@ -20,4 +21,9 @@ export interface ChangePassword {
   id: string,
   password: string,
   passwordVerify: string
+}
+
+export interface ChangeState {
+  id: string,
+  state: string
 }

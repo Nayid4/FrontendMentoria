@@ -14,7 +14,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.token;
 
   // Evitar interceptar solicitudes para refrescar el token
-  if (req.url.includes('refrescar-token')) {
+  if (req.url.includes('refresh-token')) {
     return next(req);
   }
 
@@ -30,6 +30,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       const isAuthError = error.status === 401 || error.status === 403;
 
       if (isAuthError) {
+
+        console.log('Error al refrescar el token 1');
+
         // Intentar refrescar el token si expira
         return authService.RefreshToken().pipe(
           switchMap((resp) => {
@@ -48,6 +51,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           }),
           catchError(() => {
             // Si falla el refresco del token, cerrar sesión y redirigir
+            console.log('Error al refrescar el token 2');
             authService.cerrarSesion();
             router.navigate(['/']);
             messageService.add({

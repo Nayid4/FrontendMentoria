@@ -14,28 +14,32 @@
                 class="w-full pl-10! p-1! border border-gray-300/40 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-800 focus:border-transparent"
                 type="text"
                 pInputText
-                placeholder="Search"
+                placeholder="Buscar"
             />
         </div>
         <button
             (click)="showForm()"
             class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md"
         >
-            Register
+            Registrar
         </button>
     </div>
     <div class="flex-grow overflow-auto relative">
         <p-table
+            #dt
             [value]="pageList.elements"
             [paginator]="true"
             [rowHover]="true"
             [first]="first"
-            [rows]="pageList.sizePage"
+            [rows]="rows"
+            [lazy]="true"
             [totalRecords]="pageList.totalAmount"
             [showCurrentPageReport]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
             (onPage)="onPageChange($event)"
-            
+            [sortField]="filterQuery.orderColumn"
+            [sortOrder]="filterQuery.orderList === 'asc' ? 1 : -1"
+            (onSort)="onSortChange($event)"
             scrollable="true"
             scrollHeight="flex"
             styleClass="h-full"

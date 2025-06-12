@@ -20,6 +20,13 @@ export const MANAGE_BASIC_ROUTES: Routes = [
                     (m) => m.MANAGE_CAREER_ROUTES
                 ),
             },
+            {
+                path: 'usuarios',
+                loadChildren: () =>
+                import('./manageUser/manageUser.routes').then(
+                    (m) => m.MANAGE_USER_ROUTES
+                ),
+            }
         ]
     }
 ]

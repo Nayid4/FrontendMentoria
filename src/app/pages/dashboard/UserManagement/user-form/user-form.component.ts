@@ -132,6 +132,7 @@ export class UserFormComponent implements OnInit, OnChanges {
         role: formValue.role,
         personalInformation: formValue.personalInformation,
         academicInformation: formValue.academicInformation,
+        state: this.usuario.state
       };
       this.actualizar.emit(usuarioActualizado);
     } else {
