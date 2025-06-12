@@ -8,14 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { CareerFormComponent } from '../career-form/career-form.component';
-import { Career, CareerCommand } from '../../../../../core/models/career.model';
+import { UserFormComponent } from '../user-form/user-form.component';
+import { ChangeState, User, UserCommand } from '../../../../../core/models/user.model';
 import { PageList } from '../../../../../core/models/PageList.model';
 import { FilterQuery } from '../../../../../core/models/filterQuery.model';
-import { CareerService } from '../../../../../core/services/career.service';
+import { UserService } from '../../../../../core/services/user.service';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
-  selector: 'app-career-list',
+  selector: 'app-user-list',
   standalone: true,
   imports: [
     TableModule,
@@ -25,21 +26,22 @@ import { CareerService } from '../../../../../core/services/career.service';
     InputTextModule,
     PaginatorModule,
     FormsModule,
-    CareerFormComponent
+    DialogModule,
+    UserFormComponent,
   ],
-  templateUrl: './career-list.component.html',
-  styleUrl: './career-list.component.css'
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.css'
 })
-export class CareerListComponent implements OnInit, OnDestroy {
-  careers: Career[] = [];
+export class UserListComponent implements OnInit, OnDestroy {
+  users: User[] = [];
   search: string = '';
   first = 0;
   rows = 10;
 
   visibleForm: boolean = false;
-  career: Career | null = null;
+  user: User | null = null;
 
-  pageList: PageList<Career> = {
+  pageList: PageList<User> = {
     elements: [],
     page: 1,
     sizePage: 10,
@@ -50,7 +52,7 @@ export class CareerListComponent implements OnInit, OnDestroy {
 
   filterQuery: FilterQuery = {
     searchTerm: '',
-    orderColumn: 'name',
+    orderColumn: 'userName',
     orderList: 'asc',
     page: 1,
     sizePage: 10
@@ -60,7 +62,7 @@ export class CareerListComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private service: CareerService,
+    private service: UserService,
     private messageService: MessageService,
   ) {}
 
@@ -98,7 +100,7 @@ export class CareerListComponent implements OnInit, OnDestroy {
       .GetByFilter(this.filterQuery)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
-        next: (resp: PageList<Career>) => {
+        next: (resp: PageList<User>) => {
           this.pageList = resp;
           this.first = (resp.page - 1) * resp.sizePage;
           this.rows = resp.sizePage;
@@ -106,66 +108,86 @@ export class CareerListComponent implements OnInit, OnDestroy {
       });
   }
 
-
   onSearch(event: any) {
     this.searchSubject$.next(event.target.value);
   }
 
-  registerCareer(career: CareerCommand) {
-    this.service.Create(career)
+  changeUserState(user: User) {
+  // Alterna el estado entre 'Aceptado' y 'Pendiente'
+  const newState = user.state === 'Aceptado' ? 'Pendiente' : 'Aceptado';
+  const changeState: ChangeState = {
+    id: user.id,
+    state: newState
+  };
+
+
+  this.service.changeState(changeState).subscribe({
+    next: () => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Estado actualizado',
+        detail: `El estado del usuario ha sido cambiado a ${newState}.`
+      });
+      this.loadWithFilter();
+    }
+  });
+}
+
+  registerUser(user: UserCommand) {
+    this.service.Create(user)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Registered',
-            detail: 'Career registered',
+            summary: 'Registrado',
+            detail: 'Usuario registrado',
           });
-          this.service.notifyRegistro(career);
+          this.service.notifyRegistro(user);
           this.hideForm();
         }
       });
   }
 
-  updateCareer(career: Career) {
-    this.service.Update(career.id!, career)
+  updateUser(user: User) {
+    this.service.Update(user.id!, user)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Updated',
-            detail: 'Career updated',
+            summary: 'Actualizado',
+            detail: 'Usuario actualizado',
           });
-          this.service.notifyRegistro(career);
+          this.service.notifyRegistro(user);
           this.hideForm();
         }
       });
   }
 
-  deleteCareer(career: Career) {
-    this.service.Delete(career.id!)
+  deleteUser(user: User) {
+    this.service.Delete(user.id!)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Deleted',
-            detail: 'Career deleted',
+            summary: 'Eliminado',
+            detail: 'Usuario eliminado',
           });
-          this.service.notifyRegistro(career);
+          this.service.notifyRegistro(user);
         }
       });
   }
 
-  showForm(career?: Career) {
-    this.career = career ? { ...career } : null;
+  showForm(user?: User) {
+    this.user = user ? { ...user } : null;
     this.visibleForm = true;
   }
 
   hideForm() {
     this.visibleForm = false;
-    this.career = null;
+    this.user = null;
   }
 
   onSortChange(event: { field: string, order: number }) {

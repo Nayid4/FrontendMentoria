@@ -59,6 +59,13 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         label: "Carreras",
         url: "/dashboard/basicos/carreras",
         roles: ["Administrador", "Mentor", "Ingresante"],
+      },
+      {
+        id: 3,
+        icon: "pi pi-file-edit", // Registrar informe
+        label: "usuarios",
+        url: "/dashboard/basicos/usuarios",
+        roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]
   },

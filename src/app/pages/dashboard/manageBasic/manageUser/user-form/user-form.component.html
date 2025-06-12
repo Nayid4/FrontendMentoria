@@ -1,0 +1,100 @@
+<p-dialog header="{{title}}" [modal]="true" [(visible)]="visible" [style]="{ width: '300rem' }" (onHide)="closeDialog()">
+    <form [formGroup]="formularioUsuario" class="flex flex-col  gap-2 ">
+      
+        <p-stepper [value]="1" class="">
+
+            <p-step-list>
+                @for (head of stepHeadList; track $index) {
+                    <p-step [value]="head.id"> {{ head.name }} </p-step>
+                }
+            </p-step-list>
+
+            <p-step-panels>
+                <p-step-panel [value]="1">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-col">
+                            <div
+                                class="border-2 py-10 border-gray-200  border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            >
+                            <app-rol-inscription [roleForm]="formularioUsuario.get('role')"	 />
+                            </div>
+                            <div class="flex pt-6 justify-end">
+                                <p-button label="Siguiente" icon="pi pi-arrow-right" iconPos="right" (onClick)="irAlPaso2(activateCallback)" />
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="2">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-col">
+                            <div
+                                class="border-2 py-10 border-gray-200 border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            >
+                                <app-personal-information [personalForm]="formularioUsuario.get('personalInformation')"	 />
+                            </div>
+                        </div>
+                        <div class="flex pt-6 justify-between">
+                            <p-button type="button" label="Regresar" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
+                            <p-button type="button" label="Siguiente" icon="pi pi-arrow-right" iconPos="right" (onClick)="irAlPaso3(activateCallback)" />
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="3">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-col">
+                            <div
+                                class="border-2 py-10 border-gray-200 border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            >
+                                <app-academic-information [AcademicForm]="formularioUsuario.get('academicInformation')"
+                                [CareerForm]="formularioUsuario.get('academicInformation')?.get('career')" />
+                            </div>
+                        </div>
+                        <div class="flex pt-6 justify-between">
+                            <p-button type="button" label="Regresar" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
+                            <p-button type="button" label="Siguiente" icon="pi pi-arrow-right" iconPos="right" (onClick)="irAlPaso4(activateCallback)" />
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="4">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-col ">
+                            <div
+                                class="border-2 border-gray-200 border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            >
+                                <app-resume-information [inscripcionForm]="formularioUsuario" />
+                            </div>
+                        </div>
+                        <div class="flex pt-6 justify-between">
+                            <p-button type="button" label="Regresar" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />
+                            <p-button 
+                                type="submit" 
+                                [label]="actionType === 'register' ? 'Registrar' : 'Actualizar'"
+                                icon="pi pi-arrow-right" 
+                                iconPos="right" 
+                                (onClick)="irAlpaso5(activateCallback)" />
+
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="5">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-col">
+                            <div
+                                class="border-2 py-10 border-gray-200 border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            >
+                                <app-result />
+                            </div>
+                        </div>
+                        <div class="flex pt-6 justify-start">
+                            <p-button type="button" label="Regresar" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(4)" />
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+            </p-step-panels>
+        </p-stepper>
+    </form>
+</p-dialog>
