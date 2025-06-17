@@ -1,0 +1,101 @@
+<div>
+    <app-program-form 
+        [program]="program"
+        [careers]="careers"
+        [visible]="visibleForm"
+        (register)="registerProgram($event)"
+        (update)="updateProgram($event)"
+        (close)="hideForm()"
+    />
+    <div class="flex justify-between items-center py-2! gap-4! flex-wrap">
+        <div class="relative flex items-center w-full md:w-auto">
+            <i class="pi pi-search absolute left-3 text-gray-400/60"></i>
+            <input [(ngModel)]="search"
+                (input)="onSearch($event)"
+                class="w-full pl-10! p-1! border border-gray-300/40 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-800 focus:border-transparent"
+                type="text"
+                pInputText
+                placeholder="Buscar"
+            />
+        </div>
+        <button
+            (click)="showForm()"
+            class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md"
+        >
+            Registrar
+        </button>
+    </div>
+    <div class="flex-grow overflow-auto relative">
+        <p-table
+            #dt
+            [value]="pageList.elements"
+            [paginator]="true"
+            [rowHover]="true"
+            [first]="first"
+            [rows]="rows"
+            [lazy]="true"
+            [totalRecords]="pageList.totalAmount"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+            (onPage)="onPageChange($event)"
+            [sortField]="filterQuery.orderColumn"
+            [sortOrder]="filterQuery.orderList === 'asc' ? 1 : -1"
+            (onSort)="onSortChange($event)"
+            scrollable="true"
+            scrollHeight="flex"
+            styleClass="h-full"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name" class="cursor-pointer">
+                        Nombre
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="career.name" class="cursor-pointer">
+                        Carrera
+                        <p-sortIcon field="career.name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="type" class="cursor-pointer">
+                        Tipo
+                        <p-sortIcon field="type"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="maximumNumberOfParticipants" class="cursor-pointer">
+                        Cupos
+                        <p-sortIcon field="maximumNumberOfParticipants"></p-sortIcon>
+                    </th>
+                    <th>Opciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-program>
+                <tr>
+                    <td>{{ program.name }}</td>
+                    <td>{{ program.career?.name }}</td>
+                    <td>{{ program.type }}</td>
+                    <td>{{ program.maximumNumberOfParticipants }}</td>
+                    <td>
+                        <button (click)="showForm(program)"
+                            class="cursor-pointer" title="Actualizar">
+                            <i class="pi pi-pencil hover:bg-green-700 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                        <button (click)="deleteProgram(program)"
+                            class="cursor-pointer" title="Eliminar">
+                            <i class="pi pi-trash hover:bg-red-500 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                        <!-- Botón Gestionar Actividades -->
+                        <button
+                            [routerLink]="['/dashboard/basicos/programas', program.id, 'actividades']"
+                            class="cursor-pointer" title="Gestionar Actividades">
+                            <i class="pi pi-calendar-plus hover:bg-blue-500 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                        <!-- Botón Gestionar Usuarios -->
+                        <button
+                            [routerLink]="['/dashboard/basicos/programas', program.id, 'usuarios']"
+                            class="cursor-pointer" title="Gestionar Usuarios">
+                            <i class="pi pi-users hover:bg-purple-500 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

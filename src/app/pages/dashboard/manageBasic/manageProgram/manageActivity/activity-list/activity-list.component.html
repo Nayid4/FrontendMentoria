@@ -1,0 +1,71 @@
+<div>
+    <app-activity-form
+        [activity]="activity"
+        [visible]="visibleForm"
+        [programId]="programId"
+        (register)="registerActivity($event)"
+        (update)="updateActivity($event)"
+        (close)="hideForm()"
+    ></app-activity-form>
+
+    <div class="flex justify-between items-center py-2! gap-4! flex-wrap">
+        <div class="text-lg font-bold">Actividades</div>
+        <button
+            (click)="showForm()"
+            class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md"
+        >
+            Registrar Actividad
+        </button>
+    </div>
+
+    <div class="flex-grow overflow-auto relative">
+        <p-table
+            #dt
+            [value]="activities"
+            [rowHover]="true"
+            scrollable="true"
+            scrollHeight="flex"
+            styleClass="h-full"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-activity>
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.description }}</td>
+                    <td>{{ activity.startDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+                    <td>{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+                    <td>{{ activity.state }}</td>
+                    <td class="flex gap-2! justify-center">
+                        <button (click)="showForm(activity)"
+                            class="cursor-pointer" title="Actualizar">
+                            <i class="pi pi-pencil hover:bg-green-700 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                        <button (click)="deleteActivity(activity)"
+                            class="cursor-pointer" title="Eliminar">
+                            <i class="pi pi-trash hover:bg-red-500 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                        <!-- Botón Gestionar Soluciones -->
+                        <button
+                            [routerLink]="['/dashboard/basicos/programas', programId, 'actividades', activity.id, 'soluciones']"
+                            class="cursor-pointer" title="Ver Soluciones">
+                            <i class="pi pi-list hover:bg-blue-500 hover:text-white p-2 rounded-full"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div *ngIf="!activities.length" class="text-center py-6 text-gray-400">
+            No hay actividades registradas.
+        </div>
+    </div>
+
+</div>

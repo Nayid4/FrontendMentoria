@@ -1,0 +1,67 @@
+<p-dialog header="{{title}}" [modal]="true" [(visible)]="visible" [style]="{ width: '32rem', 'max-width': '96vw' }" (onHide)="closeDialog()">
+    <span class="p-text-secondary block mb-5!">{{actionType}} program information.</span>
+    <form [formGroup]="programForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2! w-full">
+        
+        <label class="flex flex-col gap-2 font-bold">
+            Carrera
+            <select formControlName="idCareer"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                [ngClass]="{'border-red-500': isInvalidField('idCareer')}"
+            >
+                <option value="" disabled>Seleccione una carrera</option>
+                <option *ngFor="let c of careers" [value]="c.id">{{ c.name }}</option>
+            </select>
+            <span *ngIf="isInvalidField('idCareer')" class="text-red-600 text-xs">Este campo es obligatorio</span>
+        </label>
+
+        <label class="flex flex-col gap-2 font-bold">
+            Nombre
+            <input type="text" formControlName="name"
+                placeholder="Nombre del programa"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                [ngClass]="{'border-red-500': isInvalidField('name')}"
+            />
+            <span *ngIf="isInvalidField('name')" class="text-red-600 text-xs">Este campo es obligatorio</span>
+        </label>
+
+        <label class="flex flex-col gap-2 font-bold">
+            Tipo
+            <select formControlName="type"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                [ngClass]="{'border-red-500': isInvalidField('type')}"
+            >
+                <option value="" disabled>Seleccione un tipo</option>
+                <option value="Taller">Taller</option>
+                <option value="Voluntariado">Voluntariado</option>
+            </select>
+            <span *ngIf="isInvalidField('type')" class="text-red-600 text-xs">Este campo es obligatorio</span>
+        </label>
+
+        <label class="flex flex-col gap-2 font-bold">
+            Descripción
+            <textarea formControlName="description"
+                placeholder="Descripción del programa"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                rows="2"
+                [ngClass]="{'border-red-500': isInvalidField('description')}"
+            ></textarea>
+            <span *ngIf="isInvalidField('description')" class="text-red-600 text-xs">Este campo es obligatorio</span>
+        </label>
+
+        <label class="flex flex-col gap-2 font-bold">
+            Cupos máximos
+            <input type="number" formControlName="maximumNumberOfParticipants"
+                min="1"
+                placeholder="Cantidad máxima de participantes"
+                class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+                [ngClass]="{'border-red-500': isInvalidField('maximumNumberOfParticipants')}"
+            />
+            <span *ngIf="isInvalidField('maximumNumberOfParticipants')" class="text-red-600 text-xs">Debe ser mayor a 0</span>
+        </label>
+
+        <div class="flex justify-end gap-2! mt-4!">
+            <p-button type="button" label="Cancelar" severity="secondary" (click)="closeDialog()"></p-button>
+            <p-button type="submit" [label]="actionType"></p-button>
+        </div>
+    </form>
+</p-dialog>

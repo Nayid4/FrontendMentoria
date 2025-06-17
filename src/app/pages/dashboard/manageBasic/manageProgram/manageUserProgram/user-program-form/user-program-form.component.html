@@ -1,0 +1,20 @@
+<p-dialog header="Agregar Usuario" [modal]="true" [(visible)]="visible" [style]="{ width: '24rem' }" (onHide)="closeDialog()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+    <label class="flex flex-col gap-2 font-bold">
+      Usuario
+      <select formControlName="idUser"
+        class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+        [ngClass]="{'border-red-500': isInvalidField('idUser')}">
+        <option value="">Seleccione usuario</option>
+        <option *ngFor="let user of users" [value]="user.id">
+          {{ user.userName }} ({{ user.personalInformation.name }} {{ user.personalInformation.lastName }})
+        </option>
+      </select>
+      <span *ngIf="isInvalidField('idUser')" class="text-red-600 text-xs">Este campo es requerido</span>
+    </label>
+    <div class="flex justify-end gap-2 mt-4!">
+      <p-button type="button" label="Cancelar" severity="secondary" (click)="closeDialog()"></p-button>
+      <p-button type="submit" label="Agregar"></p-button>
+    </div>
+  </form>
+</p-dialog>
