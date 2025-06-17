@@ -63,8 +63,15 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
       {
         id: 3,
         icon: "pi pi-file-edit", // Registrar informe
-        label: "usuarios",
+        label: "Usuarios",
         url: "/dashboard/basicos/usuarios",
+        roles: ["Administrador", "Mentor", "Ingresante"],
+      },
+      {
+        id: 4,
+        icon: "pi pi-file-edit", // Registrar informe
+        label: "Programas",
+        url: "/dashboard/basicos/programas",
         roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]

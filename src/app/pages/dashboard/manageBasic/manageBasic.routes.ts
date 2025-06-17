@@ -26,7 +26,14 @@ export const MANAGE_BASIC_ROUTES: Routes = [
                 import('./manageUser/manageUser.routes').then(
                     (m) => m.MANAGE_USER_ROUTES
                 ),
-            }
+            },
+            {
+                path: 'programas',
+                loadChildren: () =>
+                import('./manageProgram/manageProgram.routes').then(
+                    (m) => m.MANAGE_PROGRAM_ROUTES
+                ),
+            },
         ]
     }
 ]

@@ -1,0 +1,36 @@
+<p-dialog header="Agregar solución" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }" (onHide)="closeDialog()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+    <label class="flex flex-col gap-2 font-bold">
+      Usuario
+      <select formControlName="idUser" class="w-full border-2 border-gray-400 rounded-md p-2! font-normal" [ngClass]="{'border-red-500': isInvalidField('idUser')}">
+        <option value="">Seleccione usuario</option>
+        <option *ngFor="let user of users" [value]="user.id">
+          {{ user.personalInformation.name }} {{ user.personalInformation.lastName }}
+        </option>
+      </select>
+      <span *ngIf="isInvalidField('idUser')" class="text-red-600 text-xs">Este campo es requerido</span>
+    </label>
+    
+    <label class="flex flex-col gap-2 font-bold">
+      Archivo de solución
+      <p-fileUpload 
+        mode="basic"
+        name="archivo"
+        [auto]="true"
+        [maxFileSize]="10485760" 
+        [customUpload]="true"
+        (uploadHandler)="onFileUpload($event)"
+        chooseLabel="Seleccionar archivo"
+        [ngClass]="{'border-red-500': isInvalidField('file')}"
+        [disabled]="uploading"
+      ></p-fileUpload>
+      <span *ngIf="isInvalidField('file')" class="text-red-600 text-xs">Seleccione un archivo</span>
+      <span *ngIf="fileName" class="text-xs text-gray-600">Archivo seleccionado: {{ fileName }}</span>
+    </label>
+
+    <div class="flex justify-end gap-2 mt-4!">
+      <p-button type="button" label="Cancelar" severity="secondary" (click)="closeDialog()"></p-button>
+      <p-button type="submit" [label]="uploading ? 'Guardando...' : 'Registrar'" [disabled]="uploading || !fileId"></p-button>
+    </div>
+  </form>
+</p-dialog>

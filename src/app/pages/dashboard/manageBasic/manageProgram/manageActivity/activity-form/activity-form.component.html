@@ -1,0 +1,54 @@
+<p-dialog header="{{ title }}" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }" (onHide)="closeDialog()">
+  <span class="p-text-secondary block mb-5!">{{actionType}} información de la actividad.</span>
+  <form [formGroup]="activityForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+    <label class="flex flex-col gap-2 font-bold">
+      Nombre
+      <input type="text" formControlName="name"
+        placeholder="Ingrese nombre"
+        class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+        [ngClass]="{'border-red-500': isInvalidField('name')}"
+      />
+      <span *ngIf="isInvalidField('name')" class="text-red-600 text-xs">Este campo es requerido</span>
+    </label>
+    <label class="flex flex-col gap-2 font-bold">
+      Descripción
+      <textarea formControlName="description"
+        placeholder="Ingrese descripción"
+        class="w-full border-2 border-gray-400 rounded-md p-2! font-normal resize-none"
+        [ngClass]="{'border-red-500': isInvalidField('description')}"
+      ></textarea>
+      <span *ngIf="isInvalidField('description')" class="text-red-600 text-xs">Este campo es requerido</span>
+    </label>
+    <div class="flex gap-4">
+      <label class="flex flex-col gap-2 font-bold flex-1">
+        Fecha Inicio
+        <input type="date" formControlName="startDate"
+          class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+          [ngClass]="{'border-red-500': isInvalidField('startDate')}"
+        />
+        <span *ngIf="isInvalidField('startDate')" class="text-red-600 text-xs">Este campo es requerido</span>
+      </label>
+      <label class="flex flex-col gap-2 font-bold flex-1">
+        Fecha Fin
+        <input type="date" formControlName="endDate"
+          class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+          [ngClass]="{'border-red-500': isInvalidField('endDate')}"
+        />
+        <span *ngIf="isInvalidField('endDate')" class="text-red-600 text-xs">Este campo es requerido</span>
+      </label>
+    </div>
+    <label class="flex flex-col gap-2 font-bold">
+      Estado
+      <input type="text" formControlName="state"
+        placeholder="Ej: Activa"
+        class="w-full border-2 border-gray-400 rounded-md p-2! font-normal"
+        [ngClass]="{'border-red-500': isInvalidField('state')}"
+      />
+      <span *ngIf="isInvalidField('state')" class="text-red-600 text-xs">Este campo es requerido</span>
+    </label>
+    <div class="flex justify-end gap-2 mt-4!">
+      <p-button type="button" label="Cancelar" severity="secondary" (click)="closeDialog()"></p-button>
+      <p-button type="submit" [label]="actionType"></p-button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,72 @@
+<div>
+  <app-activity-solution-form
+    [visible]="visibleForm"
+    [programActivityId]="programActivityId"
+    [users]="users"
+    (register)="addSolution($event)"
+    (close)="hideForm()"
+  ></app-activity-solution-form>
+
+  <div class="flex justify-between items-center py-2! gap-4! flex-wrap">
+    <h2 class="text-xl font-bold">Soluciones de la Actividad</h2>
+    <button (click)="showForm()"
+      class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md">
+      Agregar solución
+    </button>
+  </div>
+
+  <div class="flex-grow overflow-auto relative">
+    <p-table
+      [value]="solutions"
+      [rowHover]="true"
+      scrollable="true"
+      scrollHeight="flex"
+      styleClass="h-full"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Usuario</th>
+          <th>Archivo</th>
+          <th>Calificación</th>
+          <th>Opciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-solution>
+        <tr>
+          <td>
+            {{ getUserName(solution.idUser) }}
+          </td>
+          <td>
+            <button *ngIf="solution.idFileSolution"
+              class="cursor-pointer"
+              title="Descargar"
+              (click)="downloadFile(solution.idFileSolution)">
+              <i class="pi pi-download hover:bg-blue-500 hover:text-white p-2 rounded-full"></i>
+            </button>
+          </td>
+          <td>
+            <div *ngIf="!calificationEdit[solution.id]">
+              {{ solution.calification }}
+              <button class="ml-2" (click)="startEditCalification(solution.id, solution.calification)" title="Editar calificación">
+                <i class="pi pi-pencil hover:bg-yellow-500 hover:text-white p-2 rounded-full"></i>
+              </button>
+            </div>
+            <div *ngIf="calificationEdit[solution.id]" class="flex gap-2">
+              <input type="number" min="0" max="5" step="0.1"
+                [(ngModel)]="calificationValue[solution.id]"
+                class="border rounded w-16 px-1"
+              />
+              <button (click)="saveCalification(solution)" class="bg-green-600 text-white rounded px-2 py-1">Guardar</button>
+              <button (click)="calificationEdit[solution.id]=false" class="bg-gray-400 text-white rounded px-2 py-1">Cancelar</button>
+            </div>
+          </td>
+          <td>
+            <button (click)="deleteSolution(solution)" class="cursor-pointer" title="Eliminar">
+              <i class="pi pi-trash hover:bg-red-500 hover:text-white p-2 rounded-full"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
