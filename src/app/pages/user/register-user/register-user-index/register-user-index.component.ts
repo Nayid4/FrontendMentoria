@@ -87,24 +87,38 @@ export class RegisterUserIndexComponent implements OnInit {
         name: [''],
       }),
       personalInformation: this.fb.group({
-        dni: ['', Validators.required],
-        name: ['', Validators.required],
-        lastName: ['', Validators.required],
+        dni: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+        name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
+        lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
         sex: ['', Validators.required],
-        phone: ['', Validators.required],
+        phone: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       }),
       academicInformation: this.fb.group({
         code: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+          ]
+        ],
         career: this.fb.group({
           id: ['', Validators.required],
           name: [''],
         }),
-        cicle: [1, Validators.required],
+        cicle: [
+          1,
+          [
+            Validators.required,
+            Validators.pattern(/^[1-9][0-9]*$/) // solo enteros positivos (no negativos ni 0)
+          ]
+        ],
         expectative: ['', Validators.required],
       }),
     });
   }
+
+
 
   irAlPaso2(activateCallback: (index: number) => void) {
     const rolForm = this.formularioUsuario.get('role');

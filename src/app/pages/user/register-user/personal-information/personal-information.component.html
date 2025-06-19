@@ -4,33 +4,40 @@
         <label for="dni" class="flex flex-col gap-2 font-bold">
             DNI
             <input 
-                formControlName="dni" 
+                formControlName="dni"
                 type="text"
+                maxlength="9"
                 placeholder="Ingrese su DNI"
-                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal"
                 [ngClass]="{'border-red-500': this.campoInvalido('dni')}"
+                (keypress)="permitirSoloNumeros($event)"
+                (input)="limitarLongitud($event, 9)"
             />
+
         </label>
 
         <label for="name" class="flex flex-col gap-2 font-bold">
             Nombre
             <input 
-                formControlName="name" 
+                formControlName="name"
                 type="text"
                 placeholder="Ingrese su nombre"
-                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal"
                 [ngClass]="{'border-red-500': this.campoInvalido('name')}"
+                (keypress)="permitirSoloLetras($event)"
             />
+
         </label>
 
         <label for="lastName" class="flex flex-col gap-2 font-bold">
             Apellido
             <input 
-                formControlName="lastName" 
+                formControlName="lastName"
                 type="text"
                 placeholder="Ingrese su apellido"
-                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal"
                 [ngClass]="{'border-red-500': this.campoInvalido('lastName')}"
+                (keypress)="permitirSoloLetras($event)"
             />
         </label>
 
@@ -52,11 +59,14 @@
         <label for="phone" class="flex flex-col gap-2 font-bold">
             Telefono
             <input 
-                formControlName="phone" 
+                formControlName="phone"
                 type="text"
-                placeholder="Ingrese su telefono"
-                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal " 
+                maxlength="9"
+                placeholder="Ingrese su teléfono"
+                class="w-full border-2 border-gray-300 rounded-md p-2! font-normal"
                 [ngClass]="{'border-red-500': this.campoInvalido('phone')}"
+                (keypress)="permitirSoloNumeros($event)"
+                (input)="limitarLongitud($event, 9)"
             />
         </label>
     </div>

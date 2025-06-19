@@ -79,7 +79,7 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
   {
     id: 24,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
-    label: "Recocnocimiento",
+    label: "Reconocimiento",
     url: "/dashboard/reconocimiento",
     roles: ["Administrador", "Mentor", "Ingresante"],
     options: [
