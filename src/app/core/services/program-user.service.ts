@@ -18,6 +18,11 @@ export class ProgramUserService {
     return this.http.get<ProgramUserResponse[]>(`${this.api}/${this.endpoint}/${idProgram}`);
   }
 
+  // Obtener todos los programas de un usuario
+  getUsersByUser(idUser: string): Observable<ProgramUserResponse[]> {
+    return this.http.get<ProgramUserResponse[]>(`${this.api}/${this.endpoint}/programs-by-user/${idUser}`);
+  }
+
   // Agregar usuario a un programa
   addUserToProgram(command: AddUserToProgramCommand): Observable<void> {
     return this.http.post<void>(`${this.api}/${this.endpoint}`, command);

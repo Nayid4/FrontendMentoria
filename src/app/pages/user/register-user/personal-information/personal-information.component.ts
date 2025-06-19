@@ -28,4 +28,34 @@ export class PersonalInformationComponent {
   campoInvalido(nombreCampo: string): boolean {
     return this.formService.campoInvalido(this.personalForm, nombreCampo);
   }
+
+  permitirSoloNumeros(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    // Permite solo números (0–9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
+  permitirSoloLetras(event: KeyboardEvent) {
+    const char = String.fromCharCode(event.keyCode || event.which);
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/;
+
+    if (!regex.test(char)) {
+      event.preventDefault();
+    }
+  }
+
+  limitarLongitud(event: Event, maxLength: number): void {
+  const input = event.target as HTMLInputElement;
+  if (input.value.length > maxLength) {
+    input.value = input.value.slice(0, maxLength);
+    // Actualiza el formControl si lo estás usando con ReactiveForms
+    const controlName = input.getAttribute('formControlName');
+    if (controlName) {
+      this.personalForm.get(controlName)?.setValue(input.value);
+    }
+  }
+}
+
 }
