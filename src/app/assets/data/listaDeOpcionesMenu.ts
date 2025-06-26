@@ -76,7 +76,7 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
       }
     ]
   },
-  {
+  /*{
     id: 24,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
     label: "Reconocimiento",
@@ -91,7 +91,7 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]
-  },
+  },*/
   {
     id: 2,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
@@ -152,13 +152,13 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         url: "/dashboard/taller",
         roles: ["Administrador", "Mentor", "Ingresante"],
       },
-      {
+      /*{
         id: 2,
         icon: "pi pi-check-square", // Asistencia
         label: "Asistencia",
         url: "/dashboard/taller/asistencia",
         roles: ["Administrador", "Mentor", "Ingresante"],
-      }
+      }*/
     ]
   },
   {
@@ -175,13 +175,13 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         url: "/dashboard/voluntariado",
         roles: ["Administrador", "Mentor", "Ingresante"],
       },
-      {
+      /*{
         id: 2,
         icon: "pi pi-check-square", // Asistencia
         label: "Asistencia",
         url: "/dashboard/voluntariado/asistencia",
         roles: ["Administrador", "Mentor", "Ingresante"],
-      }
+      }*/
     ]
   },
   {
