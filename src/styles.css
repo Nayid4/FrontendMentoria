@@ -9,3 +9,7 @@
     --color-quart: "#f5f5f5";
     --color-quint: "#19191c";
 }
+
+html {
+  scroll-behavior: smooth;
+}

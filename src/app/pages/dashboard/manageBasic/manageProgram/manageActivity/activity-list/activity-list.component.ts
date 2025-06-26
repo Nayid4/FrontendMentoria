@@ -16,6 +16,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
+import { AuthService } from '../../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -40,17 +41,26 @@ export class ActivityListComponent implements OnInit {
   visibleForm = false;
   activity: ProgramActivityResponse | null = null;
   programId: string = '';
+  isAdmin = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: ProgramActivityService,
     private messageService: MessageService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.programId = this.route.snapshot.paramMap.get('id')!;
     this.loadActivities();
+
+    // Determinar si el usuario es administrador
+    this.authService.dataAuthenticated$.subscribe({
+      next: (user) => {
+        this.isAdmin = user?.role?.toLowerCase() === 'administrador';
+      }
+    });
   }
 
   loadActivities() {
@@ -71,10 +81,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   registerActivity(cmd: AddProgramActivityToProgramCommand) {
-    // El comando debe llevar el id del programa.
     cmd.idProgram = this.programId;
-
-    console.log('Comando a registrar:', cmd);
     this.service.add(cmd).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Guardado', detail: 'Actividad registrada' });
@@ -84,11 +91,8 @@ export class ActivityListComponent implements OnInit {
     });
   }
 
-  // NUEVO: Actualizar actividad existente
   updateActivity(activity: ProgramActivityResponse) {
-    // Asegura que la actividad tenga el idProgram correcto
     activity.idProgram = this.programId;
-
     this.service.update(activity).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Actualizado', detail: 'Actividad actualizada' });
@@ -99,7 +103,6 @@ export class ActivityListComponent implements OnInit {
   }
 
   deleteActivity(activity: ProgramActivityResponse) {
-    // Debe enviarse el objeto DeleteProgramActivityFromProgramCommand
     const command: DeleteProgramActivityFromProgramCommand = {
       idProgram: this.programId,
       idProgramActivity: activity.id
@@ -113,7 +116,16 @@ export class ActivityListComponent implements OnInit {
   }
 
   goToSolutions(activity: ProgramActivityResponse) {
-    this.router.navigate([`/ruta/del/programa/${this.programId}/actividades/${activity.id}/soluciones`]);
-    // Ajusta la ruta según tu módulo de rutas
+    this.router.navigate([`/dashboard/basicos/programas/${this.programId}/actividades/${activity.id}/soluciones`]);
+  }
+
+  // Helper para badge de estado
+  getEstadoBadgeClass(estado: string): string {
+    switch (estado?.toLowerCase()) {
+      case 'activo': return 'bg-green-100 text-green-800';
+      case 'completado': return 'bg-gray-100 text-gray-800';
+      case 'pendiente': return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
   }
 }

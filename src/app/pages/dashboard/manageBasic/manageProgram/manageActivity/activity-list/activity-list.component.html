@@ -8,64 +8,79 @@
         (close)="hideForm()"
     ></app-activity-form>
 
-    <div class="flex justify-between items-center py-2! gap-4! flex-wrap">
-        <div class="text-lg font-bold">Actividades</div>
+    <!-- Header con botón registrar solo para admin -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-2 mb-6">
+        <div>
+            <h2 class="text-2xl font-bold flex items-center gap-2">
+                <i class="pi pi-calendar text-blue-600 text-3xl"></i>
+                Actividades
+            </h2>
+            <p class="text-gray-500">Gestiona las actividades del programa</p>
+        </div>
         <button
+            *ngIf="isAdmin"
             (click)="showForm()"
-            class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl flex items-center gap-2 text-lg shadow"
         >
-            Registrar Actividad
+            <i class="pi pi-plus"></i> Registrar Actividad
         </button>
     </div>
 
-    <div class="flex-grow overflow-auto relative">
-        <p-table
-            #dt
-            [value]="activities"
-            [rowHover]="true"
-            scrollable="true"
-            scrollHeight="flex"
-            styleClass="h-full"
-        >
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Estado</th>
-                    <th>Opciones</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-activity>
-                <tr>
-                    <td>{{ activity.name }}</td>
-                    <td>{{ activity.description }}</td>
-                    <td>{{ activity.startDate | date: 'yyyy-MM-dd HH:mm' }}</td>
-                    <td>{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</td>
-                    <td>{{ activity.state }}</td>
-                    <td class="flex gap-2! justify-center">
-                        <button (click)="showForm(activity)"
-                            class="cursor-pointer" title="Actualizar">
-                            <i class="pi pi-pencil hover:bg-green-700 hover:text-white p-2 rounded-full"></i>
-                        </button>
-                        <button (click)="deleteActivity(activity)"
-                            class="cursor-pointer" title="Eliminar">
-                            <i class="pi pi-trash hover:bg-red-500 hover:text-white p-2 rounded-full"></i>
-                        </button>
-                        <!-- Botón Gestionar Soluciones -->
-                        <button
-                            [routerLink]="['/dashboard/basicos/programas', programId, 'actividades', activity.id, 'soluciones']"
-                            class="cursor-pointer" title="Ver Soluciones">
-                            <i class="pi pi-list hover:bg-blue-500 hover:text-white p-2 rounded-full"></i>
-                        </button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-        <div *ngIf="!activities.length" class="text-center py-6 text-gray-400">
-            No hay actividades registradas.
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let activity of activities" class="bg-white rounded-2xl shadow p-6 flex flex-col relative border border-gray-100 min-h-[320px]">
+            <!-- Nombre y estado -->
+            <div class="flex items-start justify-between">
+                <div class="text-xl font-bold mb-1">{{ activity.name }}</div>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold absolute right-6 top-6"
+                    [ngClass]="getEstadoBadgeClass(activity.state)">
+                    {{ activity.state }}
+                </span>
+            </div>
+            <!-- Descripción -->
+            <div class="text-gray-600 mb-4">{{ activity.description }}</div>
+            <!-- Fechas -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-1">
+                    <i class="pi pi-calendar-plus text-green-500"></i>
+                    <span class="font-medium text-gray-700">Inicio:</span>
+                    <span class="font-bold">{{ activity.startDate | date: 'dd/MM/yyyy, HH:mm' }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="pi pi-calendar-minus text-red-500"></i>
+                    <span class="font-medium text-gray-700">Fin:</span>
+                    <span class="font-bold">{{ activity.endDate | date: 'dd/MM/yyyy, HH:mm' }}</span>
+                </div>
+            </div>
+            <!-- Opciones -->
+            <div class="flex gap-3 mt-auto">
+                <button
+                    *ngIf="isAdmin"
+                    (click)="showForm(activity)"
+                    class="bg-blue-50 hover:bg-blue-200 text-blue-700 p-2 rounded-lg flex items-center justify-center"
+                    title="Editar"
+                >
+                    <i class="pi pi-pencil"></i>
+                </button>
+                <button
+                    *ngIf="isAdmin"
+                    (click)="deleteActivity(activity)"
+                    class="bg-red-50 hover:bg-red-200 text-red-600 p-2 rounded-lg flex items-center justify-center"
+                    title="Eliminar"
+                >
+                    <i class="pi pi-trash"></i>
+                </button>
+                <button
+                    (click)="goToSolutions(activity)"
+                    class="bg-indigo-50 hover:bg-indigo-200 text-indigo-700 p-2 rounded-lg flex items-center justify-center ml-auto"
+                >
+                    <i class="pi pi-list"></i>
+                    <span class="ml-2 font-medium">Soluciones</span>
+                </button>
+            </div>
         </div>
     </div>
-
+    <div *ngIf="!activities.length" class="text-center py-8 text-gray-400">
+        No hay actividades registradas.
+    </div>
 </div>
