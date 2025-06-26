@@ -30,7 +30,8 @@
           loading="lazy"
           allowfullscreen
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/d/u/0/embed?mid=1ixQZ1RlqPWdkHPG0o47YrbxpsQZkXfU&ehbc=2E312F">
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d975.5700310682346!2d-76.98076382243691!3d-12.131251130639227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b876ef5fca65%3A0x4bb3071b0efafbd6!2sUniversidad%20Ricardo%20Palma!5e0!3m2!1ses!2spe!4v1719279301835!5m2!1ses!2spe"
+          >
         </iframe>
       </div>
     </div>
@@ -91,10 +92,22 @@
     </div>
   
     <!-- Columna 3: Buscar y lista -->
-    <div class="space-y-4">
-      <!-- Buscar -->
-      <div class="bg-white rounded-xl shadow p-4 space-y-4">
-        <h2 class="text-xl font-bold text-center">BUSCAR</h2>
+    <div class="space-y-4!">
+
+      <!-- Si el usuario es Ingresante y tiene mentor asignado -->
+      <div *ngIf="isIngresante && mentorAsignado" class="bg-green-50 rounded-xl shadow p-4! space-y-2! border border-green-300">
+        <h2 class="text-lg font-bold text-emerald-700">Tu Mentor Asignado</h2>
+        <div>
+          <div class="font-semibold">{{ mentorAsignado?.personalInformation?.name }} {{ mentorAsignado?.personalInformation?.lastName }}</div>
+          <div class="text-gray-600">Usuario: <span class="font-mono">{{ mentorAsignado?.userName }}</span></div>
+          <div class="text-gray-600">Email: {{ mentorAsignado?.academicInformation?.email }}</div>
+          <div class="text-gray-600">Teléfono: {{ mentorAsignado?.personalInformation?.phone || 'No disponible' }}</div>
+        </div>
+      </div>
+
+      <!-- Buscar mentores -->
+      <div class="bg-white rounded-xl shadow p-4! space-y-4!">
+        <h2 class="text-xl font-bold text-center">BUSCAR POR ROL</h2>
         <div class="flex justify-between items-center">
           <span>URP LIBRE</span>
           <label class="inline-flex items-center cursor-pointer">
@@ -102,37 +115,38 @@
             <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-green-500"></div>
           </label>
         </div>
-        <select class="w-full p-2 border rounded text-center">
-          <option>MENTOR</option>
+        <select
+          class="w-full p-2 border rounded text-center"
+          [(ngModel)]="roleSeleccionado"
+        >
+          <option value="">Seleccione un rol</option>
+          <option *ngFor="let rol of roles" [value]="rol.name">{{ rol.name }}</option>
         </select>
+        <button
+          class="w-full bg-gradient-to-r from-teal-400 to-emerald-500 text-white p-3 rounded-xl text-lg flex justify-center items-center space-x-2"
+          (click)="buscarPorRol()"
+        >
+          <i class="pi pi-search"></i>
+          <span>BUSCAR</span>
+          <i class="pi pi-chevron-down"></i>
+        </button>
       </div>
-  
+
       <!-- Lista de mentores -->
-      <div class="space-y-2">
-        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
-          <span class="text-teal-500 font-bold">● MENTOR</span>
-          <span>916 812 604</span>
-        </div>
-        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
-          <span>● MENTOR</span>
-          <span>xxx xxx xxx</span>
-        </div>
-        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
-          <span>● MENTOR</span>
-          <span>xxx xxx xxx</span>
-        </div>
-        <div class="flex justify-between items-center p-2 rounded-xl bg-gray-100">
-          <span>● MENTOR</span>
-          <span>xxx xxx xxx</span>
+      <div class="space-y-2 mt-4">
+        <div
+          *ngFor="let usuario of usuariosPorRol"
+          class="flex justify-between items-center p-2 rounded-xl bg-gray-100"
+        >
+          <span class="text-teal-500 font-bold">
+            ● {{ usuario.personalInformation?.name }} {{ usuario.personalInformation?.lastName }}
+            <span class="text-xs text-gray-600 ml-2">({{ usuario.role?.name }})</span>
+          </span>
+          <span>{{ usuario.personalInformation?.phone || 'No disponible' }}</span>
         </div>
       </div>
-  
-      <!-- Botón buscar -->
-      <button class="w-full bg-gradient-to-r from-teal-400 to-emerald-500 text-white p-3 rounded-xl text-lg flex justify-center items-center space-x-2">
-        <i class="pi pi-search"></i>
-        <span>BUSCAR</span>
-        <i class="pi pi-chevron-down"></i>
-      </button>
-    </div>
+
+      
+
   </div>
   

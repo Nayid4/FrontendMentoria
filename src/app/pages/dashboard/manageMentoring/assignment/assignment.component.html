@@ -1,117 +1,82 @@
-<div class="p-6 !bg-white !rounded-lg !shadow">
-  <!-- Encabezado y grupo -->
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-center !mb-6 gap-4">
-    <div>
-      <h1 class="text-2xl font-bold text-emerald-700">MENTORÍA</h1>
-      <p class="text-sm text-gray-600">Visualiza las asignaciones entre mentores e ingresantes.</p>
-    </div>
-    <div class="flex flex-wrap items-center gap-4">
-      <button pButton icon="pi pi-plus" label="Agregar nombre a tu grupo" class="p-button-sm"></button>
-      <input pInputText type="text" placeholder="LOS ILUSIONISTAS" class="p-inputtext-sm" />
-      <input pInputText type="text" placeholder="Número de grupo" class="p-inputtext-sm" />
-      <div class="flex items-center gap-2 text-emerald-700">
-        <i class="pi pi-check-circle text-xl"></i>
-        <span class="font-medium text-sm">Cambios actualizados</span>
-      </div>
-    </div>
+<div>
+  <app-mentor-assignment-form
+    [visible]="visibleForm"
+    [mentors]="mentors"
+    [ingresantes]="ingresantes"
+    [assignment]="assignment"
+    (register)="registerAssignment($event)"
+    (update)="updateAssignment($event)"
+    (close)="hideForm()"
+  ></app-mentor-assignment-form>
+  <div class="flex justify-between items-center py-2! gap-4! flex-wrap">
+  <div class="relative flex items-center w-full md:w-auto">
+    <i class="pi pi-search absolute left-3 text-gray-400/60"></i>
+    <input [(ngModel)]="search"
+           (input)="onSearch($event)"
+           class="w-full pl-10! p-1! border border-gray-300/40 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-800 focus:border-transparent"
+           type="text"
+           pInputText
+           placeholder="Buscar mentor o ingresante"
+    />
   </div>
-
-  <!-- Cita próxima -->
-  <div class="!mb-6 bg-gray-50 p-4 rounded border">
-    <h2 class="font-semibold text-sm text-gray-700 mb-3">Tu próxima cita de mentoría</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-      <div>
-        <div class="mb-1">
-          <strong>Mentor:</strong> Carlos Rodríguez
-        </div>
-        <div class="mb-1">
-          <strong>Ingresante:</strong> Ana Martínez
-        </div>
-        <div class="mb-1">
-          <strong>Ingresante:</strong> Pedro Sánchez
-        </div>
-        <div class="text-gray-500 italic text-xs mt-2">Recuerda llegar 5 minutos antes de la hora programada</div>
-      </div>
-      <div class="border-l md:pl-4">
-        <div class="mb-1 flex items-center gap-2">
-          <i class="pi pi-calendar"></i>
-          viernes, 24 de noviembre de 2023 a las 15:30
-        </div>
-        <div class="mb-1 flex items-center gap-2">
-          <i class="pi pi-map-marker"></i>
-          Biblioteca Central, Sala 3
-          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded ml-2">Presencial</span>
-        </div>
-        <div class="text-right">
-          <button pButton label="Solicitar cambio de horario" class="p-button-sm p-button-outlined mt-2"></button>
-        </div>
-      </div>
-    </div>
+  <div class="flex gap-2">
+    <button
+      (click)="showForm()"
+      class="px-4 py-1 cursor-pointer hover:bg-gray-700 text-lg bg-gray-800 text-white font-semibold border-none rounded-md"
+    >
+      Registrar asignación
+    </button>
+    <button
+      (click)="assignAutomaticAssignments()"
+      class="px-4 py-1 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-semibold border-none rounded-md"
+      pTooltip="Asignar automáticamente los mentores"
+      tooltipPosition="top"
+    >
+      <i class="pi pi-cog mr-2"></i>
+      Asignación automática
+    </button>
   </div>
+</div>
 
-  <!-- Filtros y acciones -->
-  <div class="mb-4 flex justify-between items-center">
-    <input pInputText type="text" [(ngModel)]="filtro" placeholder="Buscar por nombre o ID..." class="p-inputtext-sm w-1/2" />
-    <div class="flex gap-2">
-      <button pButton label="Agregar asignación" icon="pi pi-plus" class="p-button-sm" (click)="agregarAsignacion()"></button>
-      <button pButton label="Filtros" icon="pi pi-filter" class="p-button-sm p-button-outlined"></button>
-    </div>
+  <div class="flex-grow overflow-auto relative">
+    <p-table
+      [value]="assignments"
+      [paginator]="true"
+      [rowHover]="true"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="assignments.length"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+      scrollable="true"
+      scrollHeight="flex"
+      styleClass="h-full"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Mentor</th>
+          <th>Ingresante</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-assignment>
+        <tr>
+          <td>
+            {{ assignment.mentor?.personalInformation?.name }} {{ assignment.mentor?.personalInformation?.lastName }}
+          </td>
+          <td>
+            {{ assignment.user?.personalInformation?.name }} {{ assignment.user?.personalInformation?.lastName }}
+          </td>
+          <td>
+            <button (click)="showForm(assignment)" class="cursor-pointer" title="Actualizar">
+              <i class="pi pi-pencil hover:bg-green-700 hover:text-white p-2 rounded-full"></i>
+            </button>
+            <button (click)="deleteAssignment(assignment)" class="cursor-pointer" title="Eliminar">
+              <i class="pi pi-trash hover:bg-red-500 hover:text-white p-2 rounded-full"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
-
-  <p-table [value]="asignacionesFiltradas" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Mentor</th>
-        <th>Ingresante</th>
-        <th>Estado</th>
-        <th>Fecha de asignación</th>
-        <th>Última actividad</th>
-        <th>Próxima cita</th>
-        <th>Acciones</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-fila let-i="rowIndex">
-      <tr>
-        <td>{{ fila.mentor }}</td>
-        <td>{{ fila.ingresante }}</td>
-        <td>
-          <span class="text-green-700 bg-emerald-100 px-2 py-0.5 rounded text-xs font-medium">
-            {{ fila.estado }}
-          </span>
-        </td>
-        <td>{{ fila.asignacion }}</td>
-        <td>{{ fila.ultima }}</td>
-        <td>
-          <div>{{ fila.fecha }}</div>
-          <div class="text-xs text-gray-500">{{ fila.hora }}<br />{{ fila.lugar }}</div>
-        </td>
-        <td class="flex gap-2">
-          <button pButton icon="pi pi-pencil" class="p-button-sm p-button-text text-emerald-700" (click)="editarAsignacion(fila, i)"></button>
-          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger p-button-outlined" (click)="eliminarAsignacion(i)"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-
-  <!-- Diálogo de edición -->
-  <p-dialog header="Editar Asignación" [(visible)]="showDialog" [modal]="true" [style]="{ width: '400px' }">
-    <div class="flex flex-col gap-4">
-      <div>
-        <label class="block text-sm mb-1">Mentor</label>
-        <input type="text" pInputText class="w-full" [(ngModel)]="formulario.mentor" />
-      </div>
-      <div>
-        <label class="block text-sm mb-1">Ingresante</label>
-        <input type="text" pInputText class="w-full" [(ngModel)]="formulario.ingresante" />
-      </div>
-      <div>
-        <label class="block text-sm mb-1">Estado</label>
-        <input type="text" pInputText class="w-full" [(ngModel)]="formulario.estado" />
-      </div>
-      <div class="flex justify-end gap-2 mt-4">
-        <button pButton label="Cancelar" class="p-button-outlined p-button-sm" (click)="showDialog = false"></button>
-        <button pButton label="Guardar" class="p-button-sm bg-black text-white border-black hover:bg-gray-800" (click)="guardarEdicion()"></button>
-      </div>
-    </div>
-  </p-dialog>
 </div>
