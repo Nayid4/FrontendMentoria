@@ -99,17 +99,23 @@ export class AuthService {
     return this.http.get<DataUser>(`${this.apiUrl}/${this.endpoint}/data-user`);
   }
 
+  private estaCerrandoSesion = false;
+
   cerrarSesion() {
+    if (this.estaCerrandoSesion) return;
+    this.estaCerrandoSesion = true;
+
     this.cookieService.delete(this.TOKEN_NAME);
     this.cookieService.delete(this.REFRESH_TOKEN_NAME);
     this.cookieService.deleteAll("/");
-
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.REFRESH_TOKEN_NAME);
- 
 
     this.authenticatedSubject.next(false);
     this.userSubject.next({} as DataUser);
+
+    // Resetear el flag con delay si quieres
+    setTimeout(() => this.estaCerrandoSesion = false, 2000);
   }
 
   ForgetPassword(changePassword : ChangePassword) : Observable<void>{

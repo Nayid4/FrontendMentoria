@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
-import { catchError, switchMap, throwError, of, EMPTY } from 'rxjs';
+import { catchError, switchMap, throwError, EMPTY, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ProblemDetails } from '../models/problemDetails.model';
@@ -18,7 +18,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  // Agregar el token de autorización si está disponible
+  // Agregar token si está disponible
   if (token) {
     req = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${token}`),
@@ -30,17 +30,14 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       const isAuthError = error.status === 401 || error.status === 403;
 
       if (isAuthError) {
+        console.log('Error de autenticación detectado (401/403)');
 
-        console.log('Error al refrescar el token 1');
-
-        // Intentar refrescar el token si expira
         return authService.RefreshToken().pipe(
           switchMap((resp) => {
-            // Guardar el nuevo token y refresh token
+            // Guardar nuevo token y reintentar solicitud
             authService.token = resp.token;
             authService.refreshToken = resp.refreshToken;
 
-            // Reintentar la solicitud original con el nuevo token
             const newToken = authService.token;
             if (newToken) {
               req = req.clone({
@@ -50,47 +47,52 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             return next(req);
           }),
           catchError(() => {
-            // Si falla el refresco del token, cerrar sesión y redirigir
-            console.log('Error al refrescar el token 2');
-            authService.cerrarSesion();
-            router.navigate(['/']);
-            messageService.add({
-              severity: 'error',
-              summary: 'Sesión Expirada',
-              detail: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
-            });
-            return EMPTY; // Finalizar la cadena sin errores
+            console.log('Error al refrescar el token (falló refresh)');
+
+            // Evitar bucle: solo cerrar sesión si no lo está haciendo ya
+            if (!(authService as any)['estaCerrandoSesion']) {
+              authService.cerrarSesion();
+
+              const currentUrl = router.url;
+              if (!['/', '/autenticacion/iniciar-sesion'].includes(currentUrl)) {
+                router.navigate(['/autenticacion/iniciar-sesion']);
+              }
+
+              messageService.add({
+                severity: 'error',
+                summary: 'Sesión Expirada',
+                detail: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+              });
+            }
+
+            return EMPTY;
           })
         );
       }
 
-      // Manejo de otros errores con ProblemDetails
+      // Manejo de errores tipo ProblemDetails
       if (error.error && error.error.title) {
         const problemDetails: ProblemDetails = error.error;
         const errorMessages = [];
 
-        // Iterar sobre el mapa de errores si está disponible
         if (problemDetails.errors) {
-          for (const [key, messages] of Object.entries(problemDetails.errors)) {
-            errorMessages.push(`${messages.join(', ')}`);
+          for (const [_, messages] of Object.entries(problemDetails.errors)) {
+            errorMessages.push(...messages);
           }
         } else {
-          // Usar el título si no hay errores específicos
           errorMessages.push(problemDetails.title);
         }
 
-        // Mostrar los errores en el servicio de mensajes
         messageService.add({
           severity: 'error',
-          summary: `Error`,
+          summary: 'Error',
           detail: errorMessages.join('\n'),
         });
       } else {
-        // Manejo genérico para errores no estándar
         const errorMessage = error.status === 0
           ? 'Error de conexión con el servidor.'
           : `Error ${error.status}: ${error.message}`;
-        
+
         messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -98,7 +100,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         });
       }
 
-      return EMPTY; // Finalizar la cadena sin errores
+      return EMPTY;
     })
   );
 };

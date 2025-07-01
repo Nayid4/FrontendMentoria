@@ -9,7 +9,7 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     roles: ["Administrador", "Mentor", "Ingresante"],
     options: []
   },
-  {
+  /*{
     id: 22,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
     label: "Actividad",
@@ -38,41 +38,41 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
         roles: ["Administrador", "Mentor", "Ingresante"],
       }
     ]
-  },
+  },*/
   {
     id: 226,
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
     label: "Datos Basicos",
     url: "/dashboard/basicos",
-    roles: ["Administrador", "Mentor", "Ingresante"],
+    roles: ["Administrador"],
     options: [
       {
         id: 1,
         icon: "pi pi-user-plus", // Asignación
         label: "Roles",
         url: "/dashboard/basicos/roles",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador"],
       },
       {
         id: 2,
         icon: "pi pi-file-edit", // Registrar informe
         label: "Carreras",
         url: "/dashboard/basicos/carreras",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador"],
       },
       {
         id: 3,
         icon: "pi pi-file-edit", // Registrar informe
         label: "Usuarios",
         url: "/dashboard/basicos/usuarios",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador"],
       },
       {
         id: 4,
         icon: "pi pi-file-edit", // Registrar informe
         label: "Programas",
         url: "/dashboard/basicos/programas",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador"],
       }
     ]
   },
@@ -97,14 +97,14 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     icon: "pi pi-briefcase", // Mentoría como proceso o actividad profesional
     label: "Mentoria",
     url: "/dashboard/mentoria",
-    roles: ["Administrador", "Mentor", "Ingresante"],
+    roles: ["Administrador"],
     options: [
       {
         id: 1,
         icon: "pi pi-user-plus", // Asignación
         label: "Asignación",
         url: "/dashboard/mentoria/asignacion",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador"],
       },
       /*{
         id: 2,
@@ -143,14 +143,14 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     icon: "pi pi-calendar", // Talleres / eventos
     label: "Talleres",
     url: "/dashboard/taller",
-    roles: ["Administrador", "Mentor", "Ingresante"],
+    roles: ["Mentor", "Ingresante"],
     options: [
       {
         id: 2,
         icon: "pi pi-check-square",
         label: "Inicio",
         url: "/dashboard/taller",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Mentor", "Ingresante"],
       },
       /*{
         id: 2,
@@ -166,14 +166,14 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     icon: "pi pi-heart", // Voluntariado / acción social
     label: "Voluntariado",
     url: "/dashboard/voluntariado",
-    roles: ["Administrador", "Mentor", "Ingresante"],
+    roles: ["Mentor", "Ingresante"],
     options: [
       {
         id: 2,
         icon: "pi pi-check-square",
         label: "Inicio",
         url: "/dashboard/voluntariado",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: [ "Mentor", "Ingresante"],
       },
       /*{
         id: 2,
@@ -189,14 +189,14 @@ export const ListaDeOpcionesMenu: ListOptions[] = [
     icon: "pi pi-graduation-cap", // Certificaciones
     label: "Certificaciones",
     url: "/dashboard/certificacion",
-    roles: ["Administrador", "Mentor", "Ingresante"],
+    roles: ["Administrador", "Mentor", ],
     options: [
       {
         id: 2,
         icon: "pi pi-send", // Solicitud de certificado
         label: "Solicitud",
         url: "/dashboard/certificacion/solicitud",
-        roles: ["Administrador", "Mentor", "Ingresante"],
+        roles: ["Administrador", "Mentor",],
       }
     ]
   }
