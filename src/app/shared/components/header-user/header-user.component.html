@@ -16,8 +16,9 @@
     <nav class="hidden lg:flex gap-6 items-center">
       @for (option of listaDeOpciones; track option.id) {
         <a 
-          class="text-sm font-medium underline-offset-4 text-gray-500 transition-all duration-300 ease-in-out transform hover:scale-105" 
-          [routerLink]="'/'" [fragment]="option.url">
+          class="text-sm font-medium underline-offset-4 text-gray-500 transition-all duration-300 ease-in-out transform hover:scale-105 cursor-pointer" 
+          (click)="scrollToSection(option.url)"
+          >
           {{option.label}}
         </a>
         @if (option != listaDeOpciones[listaDeOpciones.length - 1]) {

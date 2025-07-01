@@ -98,10 +98,10 @@
       <div *ngIf="isIngresante && mentorAsignado" class="bg-green-50 rounded-xl shadow p-4! space-y-2! border border-green-300">
         <h2 class="text-lg font-bold text-emerald-700">Tu Mentor Asignado</h2>
         <div>
-          <div class="font-semibold">{{ mentorAsignado?.personalInformation?.name }} {{ mentorAsignado?.personalInformation?.lastName }}</div>
-          <div class="text-gray-600">Usuario: <span class="font-mono">{{ mentorAsignado?.userName }}</span></div>
-          <div class="text-gray-600">Email: {{ mentorAsignado?.academicInformation?.email }}</div>
-          <div class="text-gray-600">Teléfono: {{ mentorAsignado?.personalInformation?.phone || 'No disponible' }}</div>
+          <div class="font-semibold">{{ mentorAsignado.personalInformation.name }} {{ mentorAsignado.personalInformation.lastName }}</div>
+          <div class="text-gray-600">Usuario: <span class="font-mono">{{ mentorAsignado.userName }}</span></div>
+          <div class="text-gray-600">Email: {{ mentorAsignado.academicInformation.email }}</div>
+          <div class="text-gray-600">Teléfono: {{ mentorAsignado.personalInformation.phone || 'No disponible' }}</div>
         </div>
       </div>
 
@@ -139,10 +139,10 @@
           class="flex justify-between items-center p-2 rounded-xl bg-gray-100"
         >
           <span class="text-teal-500 font-bold">
-            ● {{ usuario.personalInformation?.name }} {{ usuario.personalInformation?.lastName }}
-            <span class="text-xs text-gray-600 ml-2">({{ usuario.role?.name }})</span>
+            ● {{ usuario.personalInformation.name }} {{ usuario.personalInformation.lastName }}
+            <span class="text-xs text-gray-600 ml-2">({{ usuario.role.name }})</span>
           </span>
-          <span>{{ usuario.personalInformation?.phone || 'No disponible' }}</span>
+          <span>{{ usuario.personalInformation.phone || 'No disponible' }}</span>
         </div>
       </div>
 
